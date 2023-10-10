@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Detail Gudang</title>
+
+  <object th:include="fragments/fragment :: fonts" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+</head>
+<body>
+<header th:replace="fragments/fragment :: header"></header>
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="row d-flex mx-3 justify-content-">
+    <a href="/barang">
+      <i class="ri-arrow-left-s-line">Detail Barang</i>
+    </a>
+  </div>
+  <main id="main">
+    <section>
+      <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
+        <div class="container" data-aos="fade-up">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-5">
+              <div class="new_card p-3 py-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-5">
+                      <h2>Detail Barang</h2>
+                    </div>
+                  </div>
+                <div class="row mt-5 d-flex justify-content-center">
+                  <div class="col-md-5">
+                    <label class="labels">Merk</label>
+                    <p th:text="${barang.merk}"></p>
+                  </div>
+                  <div class="col-md-5">
+                    <label class="labels">SKU</label>
+                    <p th:text="${barang.sku}"></p>
+                  </div>
+                </div>
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-md-5">
+                      <label class="labels">Tipe Barang</label>
+                      <p th:text="${tipeBarang}"></p>
+                    </div>
+                    <div class="col-md-5">
+                      <label class="labels">Total Stok</label>
+                      <div th:if="${barang.listGudangBarang.size() == 0}">
+                        <p >0</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-md-5">
+                      <label class="labels">Harga</label>
+                      <p th:text="Rp + ${barang.hargaBarang}"></p>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="labels"></label>
+                        
+                      </div>
+                </div>
+            </br>
+                <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center">
+                      <div class="col-md-5">
+                        <h5>Daftar Gudang</h5>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
+                      <div class="container">
+                        <div th:if="${barang.listGudangBarang.size() != 0}">
+                          <div class="row d-flex justify-content-center">
+                            <table class="content-table">
+                              <thead>
+                              <tr>
+                                <th style="text-align: center" scope="col">#</th>
+                                <th style="text-align: center" scope="col">Nama Gudang</th>
+                                <th style="text-align: center" scope="col">Alamat Gudang</th>
+                                <th style="text-align: center" scope="col">Stok</th>
+                              </tr>
+                              </thead>
+                              <tbody th:each= "barang, iterationStatus : ${gudang.listGudangBarang}">
+                              <tr>
+                                <!-- <th style="text-align: center" th:text="${iterationStatus.count}"></th> -->
+                                
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div th:unless="${barang.listGudangBarang.size() != 0}">
+                          <div class="mt-5 justify-content-center" style="padding-bottom: 3%">
+                            <p class="text-center text-warning" th:text="'--Belum ada gudang yang terdaftar--'"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+        
+
+          <br />
+
+         
+        </div>
+      </div>
+    </section>
+  </main>
+</section>
+<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</body>
+</html>
