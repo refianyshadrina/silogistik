@@ -14,7 +14,7 @@
 <section id="breadcrumbs" class="breadcrumbs">
   <div class="row d-flex mx-3 justify-content-">
     <a href="/barang">
-      <i class="ri-arrow-left-s-line">Detail Barang</i>
+      <i class="ri-arrow-left-s-line">Daftar Barang</i>
     </a>
   </div>
   <main id="main">
@@ -48,6 +48,9 @@
                       <label class="labels">Total Stok</label>
                       <div th:if="${barang.listGudangBarang.size() == 0}">
                         <p >0</p>
+                      </div>
+                      <div th:unless="${barang.listGudangBarang.size() == 0}">
+                        <p >ada, tp blom itung bwang</p>
                       </div>
                     </div>
                 </div>

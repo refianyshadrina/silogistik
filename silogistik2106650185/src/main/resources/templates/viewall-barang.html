@@ -19,7 +19,17 @@
                 <div class="row d-flex justify-content-center">
                     <h2 class="text-center">Daftar Barang</h2>
                 </div>
-                
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="col-md-5">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-5">
+                                <div class="text-center buttons">
+                                    <a class="btn btn-primary" th:href="@{/barang/tambah}"><i class="ri-add-line" style="font-size: small"></i>Tambah Barang</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <br />
                 <div class="container-fluid" style="padding-bottom: 19%; display: flex; align-items: center; justify-content: center;">
                     <div class="container">
@@ -41,7 +51,12 @@
                                         <td th:text="${iterationStatus.count}"></td>
                                         <td th:text="${barang.sku}"></td>
                                         <td th:text="${barang.merk}"></td>
-                                        <td th:text="${barang.merk}"></td>
+                                        <div th:if="${barang.listGudangBarang.size() == 0}">
+                                            <td >0</td>
+                                          </div>
+                                          <div th:unless="${barang.listGudangBarang.size() == 0}">
+                                            <td >ada</td>
+                                          </div>
                                         <td th:text="Rp + ${barang.hargaBarang}"></td>
                                         <td style="vertical-align : middle;text-align:center;">
                                             <a class="btn btn-primary" th:href="@{/barang/{sku}(sku=${barang.sku})}">Detail</a>

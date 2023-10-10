@@ -6,12 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import apap.ti.silogistik2106650185.dto.GudangMapper;
+import apap.ti.silogistik2106650185.dto.request.CreateGudangBarangDTO;
+import apap.ti.silogistik2106650185.dto.request.RestockGudangReqDTO;
 import apap.ti.silogistik2106650185.model.Barang;
 import apap.ti.silogistik2106650185.model.Gudang;
 import apap.ti.silogistik2106650185.model.GudangBarang;
@@ -53,21 +56,40 @@ public class GudangController {
     public String restock(@PathVariable("idGudang") Long idGudang, Model model) {
         var gudang = gudangService.getGudangById(idGudang);
 
-        var gudangBarangDTO = new GudangBarang();
+        var gudangDTO = gudangMapper.gudangToRestockGudangReqDTO(gudang);
+
+        var gudangBarangDTO = new CreateGudangBarangDTO();
+        // var gudangBarangDTO = new GudangBarang();
 
         var listBarangExisting = barangService.getAllBarang();
 
-        gudang.setListGudangBarang(new ArrayList<>());
+        gudangDTO.setListCreateGudangBarangDTO(new ArrayList<>());
 
-        gudang.getListGudangBarang().add(gudangBarangDTO);
+        gudangDTO.getListCreateGudangBarangDTO().add(gudangBarangDTO);
 
-        model.addAttribute("gudang", gudang);
+        model.addAttribute("gudangDTO", gudangDTO);
         model.addAttribute("gudangBarangDTO", gudangBarangDTO);
         model.addAttribute("listBarang", listBarangExisting);
 
         return "form-restock-gudang";
 
     }
+
+    
+    @PostMapping(value = "{idGudang}/restock-barang", params = {"addRow"})
+    private String addRowDosenMultiple(@ModelAttribute RestockGudangReqDTO gudangDTO, @ModelAttribute CreateGudangBarangDTO createGudangBarangDTO, Model model){
+        if (gudangDTO.getListCreateGudangBarangDTO() == null || gudangDTO.getListCreateGudangBarangDTO().size() == 0){
+            gudangDTO.setListCreateGudangBarangDTO(new ArrayList<>());
+        }
+        gudangDTO.getListCreateGudangBarangDTO().add(new CreateGudangBarangDTO());
+
+        model.addAttribute("listBarang", barangService.getAllBarang());
+        model.addAttribute("gudangDTO", gudangDTO);
+        model.addAttribute("gudangBarangDTO", createGudangBarangDTO);
+
+        return "form-add-mata-kuliah";
+    }
+
 
     @PostMapping("{idGudang}/restock-barang")
     public String postRestock(@PathVariable("idGudang") Long idGudang, Model model) {

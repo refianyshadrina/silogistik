@@ -11,5 +11,12 @@ public interface BarangService {
     void saveBarang(Barang barang);
 
     Barang getBarangBySKU(String sku);
+
+    Object updateBarang(Barang baranFromDTO);
+    void generateSKU(Barang barang);
     
+
+    void resetGudangBarang(Barang barang);
+
+    void resetPermintaanPengirimanBarang(Barang barang);
 }

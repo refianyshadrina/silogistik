@@ -1,8 +1,10 @@
 package apap.ti.silogistik2106650185.dto.request;
 
 import java.util.List;
-import lombok.Data;
+
 import apap.ti.silogistik2106650185.model.GudangBarang;
+import lombok.Data;
+
 
 import jakarta.validation.constraints.Size;
 
