@@ -12,4 +12,6 @@ public interface GudangService {
     Gudang getGudangById(Long id);
 
     Gudang restock(Gudang gudang);
+
+    Long getCountGudang();
 }

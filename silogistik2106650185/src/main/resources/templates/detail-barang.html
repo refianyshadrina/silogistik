@@ -50,7 +50,7 @@
                         <p >0</p>
                       </div>
                       <div th:unless="${barang.listGudangBarang.size() == 0}">
-                        <p >ada, tp blom itung bwang</p>
+                        <p th:text="${stok}"></p>
                       </div>
                     </div>
                 </div>
@@ -85,10 +85,21 @@
                                 <th style="text-align: center" scope="col">Stok</th>
                               </tr>
                               </thead>
-                              <tbody th:each= "barang, iterationStatus : ${gudang.listGudangBarang}">
+                              <tbody th:each= "gudangBarang, iterationStatus : ${barang.listGudangBarang}">
                               <tr>
                                 <!-- <th style="text-align: center" th:text="${iterationStatus.count}"></th> -->
-                                
+                                <td style="text-align: center" th:text="${iterationStatus.count}"></td>
+                                  <td style="text-align: center" th:text="${gudangBarang.gudang.nama}"></td>
+                                  <td style="text-align: center" th:text="${gudangBarang.gudang.alamatGudang}"></td>
+                                  <div th:if="${gudangBarang.gudang.listGudangBarang.size() == 0}">
+                                      <td >0</td>
+                                    </div>
+                                    <div th:unless="${gudangBarang.gudang.listGudangBarang.size() == 0}">
+                                      <td th:text="${gudangBarang.stok}"></td>
+                                    </div>
+                                  <!-- <td style="text-align: center" th:text="${barang.listGudangBarang[__${iterationStatus.index}__].stok}"></td> -->
+                                 
+
                               </tr>
                               </tbody>
                             </table>

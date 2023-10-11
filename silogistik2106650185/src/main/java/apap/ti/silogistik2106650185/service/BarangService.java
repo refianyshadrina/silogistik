@@ -21,4 +21,8 @@ public interface BarangService {
     void resetPermintaanPengirimanBarang(Barang barang);
 
     Barang restock(Barang barang);
+
+    int calculateStock(Barang barang);
+
+    Long getCountBarang();
 }

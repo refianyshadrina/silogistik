@@ -55,7 +55,14 @@
                                             <td >0</td>
                                           </div>
                                           <div th:unless="${barang.listGudangBarang.size() == 0}">
-                                            <td >ada</td>
+                                            <td th:text="${listTotalStok[__${iterationStatus.index}__]}">
+                                                <!-- <span th:with="totalStok=0"></span>
+                                                <th:block th:each="gudangBarang : ${barang.listGudangBarang}">
+                                                    <span th:with="totalStok=${totalStok + gudangBarang.stok}"></span>
+                                                </th:block>
+                                                <span th:text="${totalStok}"></span> -->
+                                                
+                                            </td>
                                           </div>
                                         <td th:text="Rp + ${barang.hargaBarang}"></td>
                                         <td style="vertical-align : middle;text-align:center;">

@@ -41,5 +41,10 @@ public class GudangServiceImpl implements GudangService {
         gudangdb.save(gudangaseli);
         return gudangaseli;
     }
+
+    @Override
+    public Long getCountGudang() {
+        return gudangdb.count();
+    }
     
 }

@@ -16,5 +16,7 @@ public class GudangBarangServiceImpl implements GudangBarangService{
     public void saveGudangBarang(GudangBarang gudangBarang) {
         gudangBarangDb.save(gudangBarang);
     }
+
+
     
 }

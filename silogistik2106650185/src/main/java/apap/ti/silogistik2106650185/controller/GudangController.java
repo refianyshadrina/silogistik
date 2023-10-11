@@ -138,8 +138,12 @@ public class GudangController {
 
         var gudangBarang = new GudangBarang();
         gudangBarang.setStok(1);
-        gudangDTO.setListGudangBarang(listGudangBarang);
-        gudangDTO.getListGudangBarang().add(gudangBarang);
+
+        if (gudangDTO.getListGudangBarang()==null || gudangDTO.getListGudangBarang().size()==0) {
+            gudangDTO.setListGudangBarang(listGudangBarang);
+            gudangDTO.getListGudangBarang().add(gudangBarang);
+        }
+
 
         model.addAttribute("gudangDTO", gudangDTO);
         model.addAttribute("listBarang", listBarangExisting);
@@ -172,10 +176,10 @@ public class GudangController {
 
         for (GudangBarang gudangBarang : gudangFromDTO.getListGudangBarang()) {
             gudangBarang.setGudang(gudangService.getGudangById(gudangFromDTO.getIdGudang()));
-            gudangBarangService.saveGudangBarang(gudangBarang);
-
             // gudangBarang.getBarang().setListGudangBarang(gudangFromDTO.getListGudangBarang());
             // barangService.restock(gudangBarang.getBarang());
+            gudangBarangService.saveGudangBarang(gudangBarang);
+
             
         }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import apap.ti.silogistik2106650185.model.Barang;
+import apap.ti.silogistik2106650185.model.GudangBarang;
 import apap.ti.silogistik2106650185.repository.BarangDb;
 
 @Service
@@ -19,6 +20,11 @@ public class BarangServiceImpl implements BarangService {
     @Override
     public List<Barang> getAllBarang() {
         return barangDb.findAll();
+    }
+
+    @Override
+    public Long getCountBarang() {
+        return barangDb.count();
     }
 
     @Override
@@ -103,6 +109,15 @@ public class BarangServiceImpl implements BarangService {
         barangasli.setListGudangBarang(barang.getListGudangBarang());
         barangDb.save(barangasli);
         return barangasli;
+    }
+
+    @Override
+    public int calculateStock(Barang barang) {
+        int stok = 0;
+        for (GudangBarang gudangBarang : barang.getListGudangBarang()) {
+            stok += gudangBarang.getStok();
+        }
+        return stok;
     }
     
 }

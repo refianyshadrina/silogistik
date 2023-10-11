@@ -18,10 +18,10 @@
                 <nav th:fragment="navbar" id="navbar" class="navbar order-last order-lg-0">
                     <ul>
                         <li class="nav-item"><a class="nav-link" th:href="@{/}"><span>Home</span></a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/}"><span>Gudang</span></a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/}"><span>Barang</span></a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/}"><span>Permintaan Pengiriman</span></a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/}"><span>Karyawan</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/gudang}"><span>Gudang</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/barang}"><span>Barang</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/permintaan-pengiriman}"><span>Permintaan Pengiriman</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/karyawan}"><span>Karyawan</span></a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
@@ -42,24 +42,28 @@
                     <div class="col-xl-2 col-md-4">
                         <div class="icon-box">
                             <i class="ri-building-2-line"></i>
+                            <h3><a th:text="${jumlahGudang}"></a></h3>
                             <h3><a th:href="@{/gudang}">Gudang</a></h3>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4">
                         <div class="icon-box">
                             <i class="ri-shopping-bag-3-line"></i>
+                            <h3><a th:text="${jumlahBarang}"></a></h3>
                             <h3><a th:href="@{/barang}">Barang</a></h3>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4">
                         <div class="icon-box">
                             <i class="ri-send-plane-line"></i>
+                            
                             <h3><a th:href="@{/permintaan-pengiriman}">Permintaan Pengiriman</a></h3>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4">
                         <div class="icon-box">
                             <i class="ri-team-line"></i>
+                            <h3><a th:text="${jumlahKaryawan}"></a></h3>
                             <h3><a href="">Karyawan</a></h3>
                         </div>
                     </div>

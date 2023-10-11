@@ -71,13 +71,13 @@
                                   <td style="text-align: center" th:text="${iterationStatus.count}"></td>
                                   <td style="text-align: center" th:text="${barang.sku}"></td>
                                   <td style="text-align: center" th:text="${barang.merk}"></td>
-                                  <!-- <div th:if="${barang.listGudangBarang.size() == 0}">
+                                  <div th:if="${gudang.listGudangBarang.size() == 0}">
                                       <td >0</td>
                                     </div>
-                                    <div th:unless="${barang.listGudangBarang.size() == 0}">
-                                      <td >ada</td>
-                                    </div> -->
-                                  <td style="text-align: center" th:text="${gudang.listGudangBarang[__${iterationStatus.index}__].stok}"></td>
+                                    <div th:unless="${gudang.listGudangBarang.size() == 0}">
+                                      <td style="text-align: center"th:text="${gudang.listGudangBarang[__${iterationStatus.index}__].stok}"></td>
+                                    </div>
+                                  <!-- <td style="text-align: center" th:text="${gudang.listGudangBarang[__${iterationStatus.index}__].stok}"></td> -->
                                   <td style="text-align: center" th:text="Rp + ${barang.hargaBarang}"></td>
 
                               </tr>
