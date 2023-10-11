@@ -124,8 +124,8 @@ public class BarangController {
         return "form-update-barang";
     }
 
-    @PostMapping("/ubah")
-    public String updateBuku(@Valid @ModelAttribute UpdateBarangReqDTO barangDTO, BindingResult bindingResult, Model model) {
+    @PostMapping("/{idBarang}/ubah")
+    public String updateBuku(@PathVariable("idBarang") String idBarang, @Valid @ModelAttribute UpdateBarangReqDTO barangDTO, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
@@ -143,9 +143,12 @@ public class BarangController {
         //     return "error-view";
         // }
         
-        var baranFromDTO = barangMapper.UpdateBarangReqDTOToBarang(barangDTO);
+        var barangFromDTO = barangMapper.UpdateBarangReqDTOToBarang(barangDTO);
 
-        barangService.updateBarang(baranFromDTO);
+        barangService.updateBarang(barangFromDTO);
+
+        List<Barang> listBarang = barangService.getAllBarang();
+        model.addAttribute("listBarang", listBarang);
 
         model.addAttribute("page", "barang");
 

@@ -96,5 +96,13 @@ public class BarangServiceImpl implements BarangService {
         }
         return barang;
     }
+
+    @Override
+    public Barang restock(Barang barang) {
+        Barang barangasli = getBarangBySKU(barang.getSku());
+        barangasli.setListGudangBarang(barang.getListGudangBarang());
+        barangDb.save(barangasli);
+        return barangasli;
+    }
     
 }

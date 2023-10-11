@@ -2,34 +2,24 @@ package apap.ti.silogistik2106650185.dto.request;
 
 import java.util.List;
 
+import apap.ti.silogistik2106650185.model.GudangBarang;
 // import apap.ti.silogistik2106650185.model.CreateGudangBarangDTO;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class RestockGudangReqDTO {
-    @Size(max = 255)
-    private String nama;
-
-    @Size(max = 255)
-    private String alamatGudang;
+public class RestockGudangReqDTO extends CreateGudangReqDTO {
+    
+    private Long idGudang;
 
     private List<CreateGudangBarangDTO> listCreateGudangBarangDTO;
 
-    public String getNama() {
-        return nama;
+    public Long getIdGudang() {
+        return idGudang;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public String getAlamatGudang() {
-        return alamatGudang;
-    }
-
-    public void setAlamatGudang(String alamatGudang) {
-        this.alamatGudang = alamatGudang;
+    public void setIdGudang(Long idGudang) {
+        this.idGudang = idGudang;
     }
 
     public List<CreateGudangBarangDTO> getListCreateGudangBarangDTO() {
@@ -43,19 +33,19 @@ public class RestockGudangReqDTO {
     public RestockGudangReqDTO() {
     }
 
-    public RestockGudangReqDTO(@Size(max = 255) String nama, @Size(max = 255) String alamatGudang,
+    public RestockGudangReqDTO(Long idGudang, @Size(max = 255) String nama, @Size(max = 255) String alamatGudang,
+            List<GudangBarang> listGudangBarang, Long idGudang2,
             List<CreateGudangBarangDTO> listCreateGudangBarangDTO) {
-        this.nama = nama;
-        this.alamatGudang = alamatGudang;
+        super(idGudang, nama, alamatGudang, listGudangBarang);
+        idGudang = idGudang2;
         this.listCreateGudangBarangDTO = listCreateGudangBarangDTO;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
-        result = prime * result + ((nama == null) ? 0 : nama.hashCode());
-        result = prime * result + ((alamatGudang == null) ? 0 : alamatGudang.hashCode());
+        int result = super.hashCode();
+        result = prime * result + ((idGudang == null) ? 0 : idGudang.hashCode());
         result = prime * result + ((listCreateGudangBarangDTO == null) ? 0 : listCreateGudangBarangDTO.hashCode());
         return result;
     }
@@ -64,20 +54,15 @@ public class RestockGudangReqDTO {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
+        if (!super.equals(obj))
             return false;
         if (getClass() != obj.getClass())
             return false;
         RestockGudangReqDTO other = (RestockGudangReqDTO) obj;
-        if (nama == null) {
-            if (other.nama != null)
+        if (idGudang == null) {
+            if (other.idGudang != null)
                 return false;
-        } else if (!nama.equals(other.nama))
-            return false;
-        if (alamatGudang == null) {
-            if (other.alamatGudang != null)
-                return false;
-        } else if (!alamatGudang.equals(other.alamatGudang))
+        } else if (!idGudang.equals(other.idGudang))
             return false;
         if (listCreateGudangBarangDTO == null) {
             if (other.listCreateGudangBarangDTO != null)
@@ -87,6 +72,5 @@ public class RestockGudangReqDTO {
         return true;
     }
 
-    
     
 }

@@ -19,4 +19,6 @@ public interface BarangService {
     void resetGudangBarang(Barang barang);
 
     void resetPermintaanPengirimanBarang(Barang barang);
+
+    Barang restock(Barang barang);
 }
