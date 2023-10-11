@@ -114,8 +114,10 @@ public class BarangServiceImpl implements BarangService {
     @Override
     public int calculateStock(Barang barang) {
         int stok = 0;
-        for (GudangBarang gudangBarang : barang.getListGudangBarang()) {
-            stok += gudangBarang.getStok();
+        if (barang.getListGudangBarang()!=null || barang.getListGudangBarang().size() == 0){
+            for (GudangBarang gudangBarang : barang.getListGudangBarang()) {
+                stok += gudangBarang.getStok();
+            }
         }
         return stok;
     }

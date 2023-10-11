@@ -51,19 +51,7 @@
                                         <td th:text="${iterationStatus.count}"></td>
                                         <td th:text="${barang.sku}"></td>
                                         <td th:text="${barang.merk}"></td>
-                                        <div th:if="${barang.listGudangBarang.size() == 0}">
-                                            <td >0</td>
-                                          </div>
-                                          <div th:unless="${barang.listGudangBarang.size() == 0}">
-                                            <td th:text="${listTotalStok[__${iterationStatus.index}__]}">
-                                                <!-- <span th:with="totalStok=0"></span>
-                                                <th:block th:each="gudangBarang : ${barang.listGudangBarang}">
-                                                    <span th:with="totalStok=${totalStok + gudangBarang.stok}"></span>
-                                                </th:block>
-                                                <span th:text="${totalStok}"></span> -->
-                                                
-                                            </td>
-                                          </div>
+                                        <td th:text="${barangService.calculateStock(barang)}"></td>
                                         <td th:text="Rp + ${barang.hargaBarang}"></td>
                                         <td style="vertical-align : middle;text-align:center;">
                                             <a class="btn btn-primary" th:href="@{/barang/{sku}(sku=${barang.sku})}">Detail</a>

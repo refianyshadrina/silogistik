@@ -32,15 +32,10 @@ public class BarangController {
 
     @GetMapping("")
     public String viewAllBarang(Model model) {
-        List<Integer> totalStok = new ArrayList<>(); 
         List<Barang> listBarang = barangService.getAllBarang();
-        for(Barang barang:listBarang){
-            if (barang.getListGudangBarang() != null || barang.getListGudangBarang().size() != 0) {
-                totalStok.add(barangService.calculateStock(barang));
-            } 
-        }
+  
         model.addAttribute("listBarang", listBarang);
-        model.addAttribute("listTotalStok", totalStok);
+        model.addAttribute("barangService", barangService);
         model.addAttribute("page", "barang");
         return "viewall-barang";
     }
@@ -113,7 +108,7 @@ public class BarangController {
 
         List<Barang> listBarang = barangService.getAllBarang();
         model.addAttribute("listBarang", listBarang);
-
+        model.addAttribute("barangService", barangService);
         model.addAttribute("page", "barang");
         return "viewall-barang";
 
@@ -157,7 +152,7 @@ public class BarangController {
 
         List<Barang> listBarang = barangService.getAllBarang();
         model.addAttribute("listBarang", listBarang);
-
+        model.addAttribute("barangService", barangService);
         model.addAttribute("page", "barang");
 
         return "viewall-barang";
