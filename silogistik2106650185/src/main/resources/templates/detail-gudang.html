@@ -26,10 +26,11 @@
               <div class="new_card p-3 py-5">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-5">
-                      <h2>Daftar Gudang</h2>
+                      <h2>Detail Gudang</h2>
                     </div>
                     <div class="col text-lg-end">
-                      <a class="btn btn-primary" th:href="@{/}"><i class="ri-add-line" style="font-size: small"></i>Restock Barang</a>
+                      <!-- th:href="@{/barang/{sku}(sku=${barang.sku})}" -->
+                      <a class="btn btn-primary" th:href="@{/gudang/{idGudang}/restock-barang(idGudang=${gudang.idGudang})}"><i class="ri-add-line" style="font-size: small"></i>Restock Barang</a>
                     </div>
                   </div>
                 <div class="row mt-5 d-flex justify-content-center">
@@ -65,10 +66,20 @@
                                 <th style="text-align: center" scope="col">Harga</th>
                               </tr>
                               </thead>
-                              <tbody th:each= "barang, iterationStatus : ${gudang.listGudangBarang}">
+                              <tbody th:each= "barang, iterationStatus : ${listBarang}">
                               <tr>
-                                <!-- <th style="text-align: center" th:text="${iterationStatus.count}"></th> -->
-                                
+                                  <td style="text-align: center" th:text="${iterationStatus.count}"></td>
+                                  <td style="text-align: center" th:text="${barang.sku}"></td>
+                                  <td style="text-align: center" th:text="${barang.merk}"></td>
+                                  <div th:if="${gudang.listGudangBarang.size() == 0}">
+                                      <td >0</td>
+                                    </div>
+                                    <div th:unless="${gudang.listGudangBarang.size() == 0}">
+                                      <td style="text-align: center"th:text="${gudang.listGudangBarang[__${iterationStatus.index}__].stok}"></td>
+                                    </div>
+                                  <!-- <td style="text-align: center" th:text="${gudang.listGudangBarang[__${iterationStatus.index}__].stok}"></td> -->
+                                  <td style="text-align: center" th:text="Rp + ${barang.hargaBarang}"></td>
+
                               </tr>
                               </tbody>
                             </table>

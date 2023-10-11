@@ -9,7 +9,7 @@ import jakarta.validation.constraints.*;
 @Table(name="barang")
 public class Barang {
     @Id
-    @Size(min=7, max=7)
+    // @Size(min=7, max=7)
     private String sku;
 
     @NotNull

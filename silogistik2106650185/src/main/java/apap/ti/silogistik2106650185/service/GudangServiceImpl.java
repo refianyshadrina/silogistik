@@ -33,5 +33,18 @@ public class GudangServiceImpl implements GudangService {
         }
         return null;
     }
+
+    @Override
+    public Gudang restock(Gudang gudang) {
+        Gudang gudangaseli = getGudangById(gudang.getIdGudang());
+        gudangaseli.setListGudangBarang(gudang.getListGudangBarang());
+        gudangdb.save(gudangaseli);
+        return gudangaseli;
+    }
+
+    @Override
+    public Long getCountGudang() {
+        return gudangdb.count();
+    }
     
 }

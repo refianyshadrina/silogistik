@@ -10,4 +10,6 @@ public interface KaryawanService {
     void saveKaryawan(Karyawan karyawan);
 
     Karyawan getKaryawanById(Long id);
+
+    Long getCountKaryawan();
 }
