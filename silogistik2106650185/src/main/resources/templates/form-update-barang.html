@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Ubah Barang</title>
+
+    <object th:include="fragments/fragment :: fonts" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+</head>
+<body>
+<header th:replace="fragments/fragment :: header"></header>
+<section id="breadcrumbs" class="breadcrumbs">
+
+    <main id="main">
+        <section>
+            <div class="container-fluid" style="padding-bottom: 4%; display: flex; align-items: center; justify-content: center;">
+                <div class="container" data-aos="fade-up">
+                    <div class="d-flex justify-content-center mb-4">
+                        <h4 class="text-center">Ubah Barang</h4>
+                    </div>
+                    <form th:action="@{/barang/{idBarang}/ubah(id=${barangDTO.sku})}" th:object="${barangDTO}" method="POST">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-7">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-md-10">
+                                            <label class="labels">SKU</label>
+                                            <input class="form-control" type="text" th:field="*{sku}" disabled/>
+                                            <input class="form-control" type="hidden" th:field="*{sku}" />
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-md-10">
+                                            <label class="labels">Merk Barang</label>
+                                            <input class="form-control" type="text" th:field="*{merk}" />
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-md-10">
+                                            <label class="labels">Tipe Barang</label>
+                                            <select class="form-control" name="tipeBarang" disabled>
+                                                <!-- <option th:each="penerbit: ${listPenerbit}"
+                                                        th:value="${penerbit.idPenerbit}" th:text="${penerbit.namaPenerbit}"></option> -->
+                                                <option th:value="1">Elektronik</option>
+                                                <option th:value="2">Pakaian</option>
+                                                <option th:value="3">Makanan</option>
+                                                <option th:value="4">Kosmetik</option>
+                                                <option th:value="5">Alat</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-md-10">
+                                            <label class="labels">Harga</label>
+                                            <input class="form-control" type="text" th:field="*{hargaBarang}" />
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <button class="btn btn-primary" type="submit">Simpan</button>
+                                    </div>
+                                    <div class="mt-3 text-center">
+                                        <a th:href="@{/barang}" class="btn btn-danger">Kembali</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <br />
+         
+                </div>
+            </div>
+        </section>
+    </main>
+</section>
+<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</body>
+</html>

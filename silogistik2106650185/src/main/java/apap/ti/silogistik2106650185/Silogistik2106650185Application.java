@@ -63,44 +63,44 @@ public class Silogistik2106650185Application {
 				karyawanService.saveKaryawan(karyawan);
 
 				// BARANG
-				var barangDTO = new CreateBarangReqDTO();
-				var tipeBarang = random.nextInt(5-1) + 1;
-				var sku = "";
-				switch (tipeBarang) {
-					case 1:
-						sku = "ELEC";
-						break;
-					case 2:
-						sku = "CLOT";
-						break;
-					case 3:
-						sku = "FOOD";
-						break;
-					case 4:
-						sku = "COSM";
-						break;
-					case 5:
-						sku = "TOOL";
-						break;
-				}
-				int random_number = random.nextInt(999) + 1;
-				DecimalFormat decimalFormat = new DecimalFormat("00");
-				String formatted_number = decimalFormat.format(random_number);
+				// var barangDTO = new CreateBarangReqDTO();
+				// var tipeBarang = random.nextInt(5-1) + 1;
+				// var sku = "";
+				// switch (tipeBarang) {
+				// 	case 1:
+				// 		sku = "ELEC";
+				// 		break;
+				// 	case 2:
+				// 		sku = "CLOT";
+				// 		break;
+				// 	case 3:
+				// 		sku = "FOOD";
+				// 		break;
+				// 	case 4:
+				// 		sku = "COSM";
+				// 		break;
+				// 	case 5:
+				// 		sku = "TOOL";
+				// 		break;
+				// }
+				// int random_number = random.nextInt(999) + 1;
+				// DecimalFormat decimalFormat = new DecimalFormat("00");
+				// String formatted_number = decimalFormat.format(random_number);
 
-				sku += formatted_number;
-				sku = "ELEC001";
-				var merk = faker.commerce().productName();
-				var harga = 1000L + (long) (random.nextDouble() * (100000L - 1000L));
+				// sku += formatted_number;
+				// sku = "ELEC001";
+				// var merk = faker.commerce().productName();
+				// var harga = 1000L + (long) (random.nextDouble() * (100000L - 1000L));
 
-				barangDTO.setSku(sku);
-				barangDTO.setTipeBarang(tipeBarang);
-				barangDTO.setMerk(merk);
-				barangDTO.setHargaBarang(harga);
+				// barangDTO.setSku(sku);
+				// barangDTO.setTipeBarang(tipeBarang);
+				// barangDTO.setMerk(merk);
+				// barangDTO.setHargaBarang(harga);
 
-				var barang = barangMapper.createBarangReqDTOToBarang(barangDTO);
-				barangService.saveBarang(barang);
+				// var barang = barangMapper.createBarangReqDTOToBarang(barangDTO);
+				// barangService.saveBarang(barang);
 			
-				
+
 
 			}
 		};
