@@ -89,6 +89,7 @@ public class GudangController {
 
         model.addAttribute("gudangDTO", gudangDTO);
         model.addAttribute("listBarang", listBarangExisting);
+        model.addAttribute("page", "gudang");
 
         return "form-updatestock-gudang";
 
@@ -107,6 +108,7 @@ public class GudangController {
 
         model.addAttribute("listBarang", barangService.getAllBarang());
         model.addAttribute("gudangDTO", gudangDTO);
+        model.addAttribute("page", "gudang");
 
         return "form-updatestock-gudang";
     }
@@ -161,7 +163,7 @@ public class GudangController {
         model.addAttribute("listGudangBarang", listGudangBarang);
         model.addAttribute("listGudang", listGudang);
         model.addAttribute("listBarangExisting", listBarangExisting);
-
+        model.addAttribute("page", "gudang");
         return "cari-barang";
     }
 

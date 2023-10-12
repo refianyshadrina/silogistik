@@ -21,7 +21,6 @@ public class PermintaanPengiriman {
     private Long idPermintaanPengiriman;
 
     @NotNull
-    @Size(max=16, min=16)
     @Column(name="nomor_pengiriman", nullable = false)
     private String nomorPengiriman;
 
@@ -46,7 +45,6 @@ public class PermintaanPengiriman {
     private int biayaPengiriman;
 
     @NotNull
-    @Size(max=4)
     @Column(name="jenis_layanan", nullable = false)
     private int jenisLayanan;
 

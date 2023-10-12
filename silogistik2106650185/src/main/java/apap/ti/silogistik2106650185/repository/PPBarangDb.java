@@ -3,8 +3,9 @@ package apap.ti.silogistik2106650185.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import apap.ti.silogistik2106650185.model.Barang;
+import apap.ti.silogistik2106650185.model.PermintaanPengirimanBarang;
 
 @Repository
-public interface BarangDb extends JpaRepository<Barang, String> {
+public interface PPBarangDb extends JpaRepository<PermintaanPengirimanBarang, Long>{
+    
 }
