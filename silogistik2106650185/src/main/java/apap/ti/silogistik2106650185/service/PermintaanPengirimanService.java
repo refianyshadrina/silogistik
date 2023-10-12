@@ -15,5 +15,9 @@ public interface PermintaanPengirimanService {
     void save(PermintaanPengiriman permintaanPengiriman);
 
     void generateNomor(PermintaanPengiriman ppFromDto);
+
+    PermintaanPengiriman getPPByNomor(String id);
+
+    void delete(PermintaanPengiriman permintaan);
     
 }

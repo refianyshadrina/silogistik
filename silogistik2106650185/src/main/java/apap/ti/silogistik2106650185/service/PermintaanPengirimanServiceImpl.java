@@ -41,10 +41,10 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
     @Override
     public void save(PermintaanPengiriman permintaanPengiriman) {
 
-        LocalDateTime currentDateTime = LocalDateTime.now();
+        // LocalDateTime currentDateTime = LocalDateTime.now();
         
-        permintaanPengiriman.setNomorPengiriman("temp");
-        permintaanPengiriman.setWaktuPermintaan(currentDateTime);
+        // permintaanPengiriman.setNomorPengiriman("temp");
+        // permintaanPengiriman.setWaktuPermintaan(currentDateTime);
         permintaanPengirimanDb.save(permintaanPengiriman);
     }
 
@@ -81,13 +81,28 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
                 break;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy:MM:dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
 
         String formattedDateTime = ppFromDto.getWaktuPermintaan().format(formatter);
 
         noPengiriman += formattedDateTime;
         
         ppFromDto.setNomorPengiriman(noPengiriman.substring(0, Math.min(noPengiriman.length(), 16)));
+    }
+
+    @Override
+    public PermintaanPengiriman getPPByNomor(String id) {
+        for (PermintaanPengiriman permintaanPengiriman : getAllPermintaanPengiriman()) {
+            if (permintaanPengiriman.getNomorPengiriman().equals(id)) {
+                return permintaanPengiriman;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(PermintaanPengiriman permintaan) {
+        permintaanPengirimanDb.deleteById(permintaan.getIdPermintaanPengiriman());
     }
     
 }

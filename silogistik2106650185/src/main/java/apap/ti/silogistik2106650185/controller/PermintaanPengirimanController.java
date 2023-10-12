@@ -2,6 +2,8 @@ package apap.ti.silogistik2106650185.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
@@ -99,17 +102,19 @@ public class PermintaanPengirimanController {
         Date parsedDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            parsedDate = dateFormat.parse(ppDTO.getTanggalPengiriman());
+            parsedDate = dateFormat.parse(ppDTO.gettanggalKirim());
             ppFromDto.setTanggalPengiriman(parsedDate);
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         ppFromDto.setListPermintaanPengirimanBarang(new ArrayList<>());
-        
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        ppFromDto.setNomorPengiriman("temp");
+        ppFromDto.setWaktuPermintaan(currentDateTime);
         permintaanPengirimanService.save(ppFromDto);
         
-        for (PermintaanPengirimanBarang ppBarang : ppFromDto.getListPermintaanPengirimanBarang()) {
+        for (PermintaanPengirimanBarang ppBarang : ppDTO.getListPermintaanPengirimanBarang()) {
             ppBarang.setPermintaanPengiriman(permintaanPengirimanService.getPPById(ppFromDto.getIdPermintaanPengiriman()));
             // ppBarang.setPermintaanPengiriman(ppFromDto);
             ppBarangService.save(ppBarang);
@@ -118,8 +123,7 @@ public class PermintaanPengirimanController {
         ppFromDto.setListPermintaanPengirimanBarang(ppDTO.getListPermintaanPengirimanBarang());
 
         permintaanPengirimanService.generateNomor(ppFromDto);
-        
-        
+        permintaanPengirimanService.save(ppFromDto);
 
         //         if (bindingResult.hasErrors()) {
         //     List<ObjectError> errors = bindingResult.getAllErrors();
@@ -143,6 +147,32 @@ public class PermintaanPengirimanController {
         model.addAttribute("page", "permintaanpengiriman");
         return "viewall-permintaanpengiriman";
 
+    }
+
+    @GetMapping("/{id}/cancel")
+    public String deleteBuku(@PathVariable("id") Long id, Model model) {
+        var permintaan = permintaanPengirimanService.getPPById(id);
+
+        if (permintaan != null) {
+
+            LocalDateTime waktuPembuatan = permintaan.getWaktuPermintaan();
+            LocalDateTime waktuSekarang = LocalDateTime.now();
+            
+            Duration selisih = Duration.between(waktuPembuatan, waktuSekarang);
+            
+            String nomor = permintaan.getNomorPengiriman();
+            model.addAttribute("nomor", nomor);
+            if (selisih.toHours() <= 24) {
+                permintaanPengirimanService.delete(permintaan);
+                model.addAttribute("page", "permintaanpengiriman");
+                return "success-delete-pp";
+            } else {
+                
+                return "error-view"; 
+            }
+        } else {
+            return "error-view";
+        }
     }
     
 }

@@ -19,7 +19,7 @@ public class CreatePPReqDTO {
 
     private String alamatPenerima;
 
-    private String tanggalPengiriman;
+    private String tanggalKirim;
 
     private int biayaPengiriman;
 
@@ -63,12 +63,12 @@ public class CreatePPReqDTO {
         this.alamatPenerima = alamatPenerima;
     }
 
-    public String getTanggalPengiriman() {
-        return tanggalPengiriman;
+    public String gettanggalKirim() {
+        return tanggalKirim;
     }
 
-    public void setTanggalPengiriman(String tanggalPengiriman) {
-        this.tanggalPengiriman = tanggalPengiriman;
+    public void settanggalKirim(String tanggalKirim) {
+        this.tanggalKirim = tanggalKirim;
     }
 
     public int getBiayaPengiriman() {
@@ -112,13 +112,13 @@ public class CreatePPReqDTO {
     }
 
     public CreatePPReqDTO(String nomorPengiriman, boolean isCancelled, String namaPenerima, String alamatPenerima,
-            String tanggalPengiriman, int biayaPengiriman, int jenisLayanan, LocalDateTime waktuPermintaan,
+            String tanggalKirim, int biayaPengiriman, int jenisLayanan, LocalDateTime waktuPermintaan,
             Karyawan karyawan, List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
         this.nomorPengiriman = nomorPengiriman;
         this.isCancelled = isCancelled;
         this.namaPenerima = namaPenerima;
         this.alamatPenerima = alamatPenerima;
-        this.tanggalPengiriman = tanggalPengiriman;
+        this.tanggalKirim = tanggalKirim;
         this.biayaPengiriman = biayaPengiriman;
         this.jenisLayanan = jenisLayanan;
         this.waktuPermintaan = waktuPermintaan;
