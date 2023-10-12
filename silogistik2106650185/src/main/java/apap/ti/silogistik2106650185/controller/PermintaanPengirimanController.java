@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-import org.springframework.validation.ObjectError;
 import java.util.Date;
 import apap.ti.silogistik2106650185.dto.PPMapper;
 import apap.ti.silogistik2106650185.dto.request.CreatePPReqDTO;
+import apap.ti.silogistik2106650185.model.Barang;
 import apap.ti.silogistik2106650185.model.PermintaanPengiriman;
 import apap.ti.silogistik2106650185.model.PermintaanPengirimanBarang;
 import apap.ti.silogistik2106650185.service.BarangService;
@@ -121,9 +121,7 @@ public class PermintaanPengirimanController {
         }
         
         ppFromDto.setListPermintaanPengirimanBarang(ppDTO.getListPermintaanPengirimanBarang());
-
-        permintaanPengirimanService.generateNomor(ppFromDto);
-        permintaanPengirimanService.save(ppFromDto);
+        permintaanPengirimanService.create(ppFromDto, ppDTO.getListPermintaanPengirimanBarang());
 
         //         if (bindingResult.hasErrors()) {
         //     List<ObjectError> errors = bindingResult.getAllErrors();
@@ -170,6 +168,36 @@ public class PermintaanPengirimanController {
                 
                 return "error-view"; 
             }
+        } else {
+            return "error-view";
+        }
+    }
+
+    @GetMapping("/{id}") 
+    public String detailPP(@PathVariable("id") Long id, Model model) {
+        var permintaan = permintaanPengirimanService.getPPById(id);
+
+        if (permintaan!=null) {
+            model.addAttribute("pp", permintaan);
+
+            String jenisLayanan = "";
+            switch(permintaan.getJenisLayanan()) {
+                case 1:
+                    jenisLayanan = "Same day";
+                    break;
+                case 2:
+                    jenisLayanan = "Kilat";
+                    break;
+                case 3:
+                    jenisLayanan = "Reguler";
+                    break;
+                case 4:
+                    jenisLayanan = "Hemat";
+                    break;
+            }
+            model.addAttribute("jenisLayanan", jenisLayanan);
+            model.addAttribute("ppService", permintaanPengirimanService);
+            return "detail-permintaanpengiriman";
         } else {
             return "error-view";
         }

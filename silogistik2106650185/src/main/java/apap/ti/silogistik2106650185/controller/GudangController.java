@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
-import apap.ti.silogistik2106650185.dto.GudangBarangMapper;
 import apap.ti.silogistik2106650185.dto.GudangMapper;
 import apap.ti.silogistik2106650185.dto.request.RestockGudangReqDTO;
 import apap.ti.silogistik2106650185.model.Barang;
@@ -38,8 +37,6 @@ public class GudangController {
     @Autowired
     private GudangBarangService gudangBarangService;
 
-    @Autowired
-    private GudangBarangMapper gudangBarangMapper;
 
     @GetMapping("")
     public String viewAllGudang(Model model) {

@@ -1,7 +1,5 @@
 package apap.ti.silogistik2106650185.service;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -103,6 +101,20 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
     @Override
     public void delete(PermintaanPengiriman permintaan) {
         permintaanPengirimanDb.deleteById(permintaan.getIdPermintaanPengiriman());
+    }
+
+    @Override
+    public void create(PermintaanPengiriman ppFromDto, List<PermintaanPengirimanBarang> permintaanPengirimanBarangs) {
+        ppFromDto.setListPermintaanPengirimanBarang(permintaanPengirimanBarangs);
+
+        generateNomor(ppFromDto);
+
+        save(ppFromDto);
+    }
+
+    @Override
+    public Long calculateTotal(PermintaanPengirimanBarang ppBarang) {
+        return ppBarang.getKuantitasPengiriman() * ppBarang.getBarang().getHargaBarang();
     }
     
 }
