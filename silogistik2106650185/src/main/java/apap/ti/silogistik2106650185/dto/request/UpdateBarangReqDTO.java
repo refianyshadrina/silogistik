@@ -1,5 +1,6 @@
 package apap.ti.silogistik2106650185.dto.request;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import apap.ti.silogistik2106650185.model.GudangBarang;
@@ -19,7 +20,7 @@ public class UpdateBarangReqDTO extends CreateBarangReqDTO{
 
     
 
-    public UpdateBarangReqDTO(@Size(max = 5) int tipeBarang, String merk, Long hargaBarang,
+    public UpdateBarangReqDTO(@Size(max = 5) int tipeBarang, String merk, BigDecimal hargaBarang,
             List<GudangBarang> listGudangBarang, List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang,
             String sku) {
         super(tipeBarang, merk, hargaBarang, listGudangBarang, listPermintaanPengirimanBarang);

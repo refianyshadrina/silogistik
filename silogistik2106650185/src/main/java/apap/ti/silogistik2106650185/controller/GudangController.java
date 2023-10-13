@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
-import apap.ti.silogistik2106650185.dto.GudangBarangMapper;
 import apap.ti.silogistik2106650185.dto.GudangMapper;
 import apap.ti.silogistik2106650185.dto.request.RestockGudangReqDTO;
 import apap.ti.silogistik2106650185.model.Barang;
@@ -38,8 +37,6 @@ public class GudangController {
     @Autowired
     private GudangBarangService gudangBarangService;
 
-    @Autowired
-    private GudangBarangMapper gudangBarangMapper;
 
     @GetMapping("")
     public String viewAllGudang(Model model) {
@@ -89,6 +86,7 @@ public class GudangController {
 
         model.addAttribute("gudangDTO", gudangDTO);
         model.addAttribute("listBarang", listBarangExisting);
+        model.addAttribute("page", "gudang");
 
         return "form-updatestock-gudang";
 
@@ -107,6 +105,7 @@ public class GudangController {
 
         model.addAttribute("listBarang", barangService.getAllBarang());
         model.addAttribute("gudangDTO", gudangDTO);
+        model.addAttribute("page", "gudang");
 
         return "form-updatestock-gudang";
     }
@@ -161,7 +160,7 @@ public class GudangController {
         model.addAttribute("listGudangBarang", listGudangBarang);
         model.addAttribute("listGudang", listGudang);
         model.addAttribute("listBarangExisting", listBarangExisting);
-
+        model.addAttribute("page", "gudang");
         return "cari-barang";
     }
 

@@ -13,7 +13,7 @@
 <header th:replace="fragments/fragment :: header"></header>
 <section id="breadcrumbs" class="breadcrumbs">
   <div class="row d-flex mx-3 justify-content-">
-    <a href="/pengiriman-barang">
+    <a href="/permintaan-pengiriman">
       <i class="ri-arrow-left-s-line">List Pengiriman Barang</i>
     </a>
   </div>
@@ -24,27 +24,56 @@
           <div class="row d-flex justify-content-center">
             <div class="col-md-6">
               <div class="new_card p-3 py-5">
-                <div class="d-flex justify-content-center mb-4">
+                <!-- <div class="d-flex justify-content-center mb-4">
                   <h4 class="text-center">Detail Pengiriman Barang</h4>
+                </div> -->
+                <div class="row d-flex justify-content-center mb-4">
+                  <div class="col-md-5">
+                    <h2>Detail Pengiriman</h2>
+                  </div>
+                  <div class="col text-lg-end">
+                    <!-- th:href="@{/barang/{sku}(sku=${barang.sku})}" -->
+                    <a class="btn btn-primary" th:href="@{/permintaan-pengiriman/{id}/cancel(id=${pp.idPermintaanPengiriman})}"><i class="ri-add-line" style="font-size: small"></i>Cancel</a>
+                  </div>
                 </div>
                 <div class="row mt-5 d-flex justify-content-center">
                   <div class="col-md-5">
                     <label class="labels">No. Permintaan Pengiriman</label>
-                    <p th:text="${mahasiswa.npm}"></p>
+                    <p th:text="${pp.nomorPengiriman}"></p>
                   </div>
                   <div class="col-md-5">
                     <label class="labels">Waktu Permintaan</label>
-                    <p th:text="${mahasiswa.email}"></p>
+                    <p th:text="${pp.waktuPermintaan}"></p>
                   </div>
                 </div>
                 <div class="row mt-4 d-flex justify-content-center">
                   <div class="col-md-5">
                     <label class="labels">Karyawan Bertugas</label>
-                    <p th:text="${mahasiswa.namaDepan} + ' ' +  ${mahasiswa.namaBelakang}"></p>
+                    <p th:text="${pp.karyawan.nama}"></p>
                   </div>
                   <div class="col-md-5 mb-2">
                     <label class="labels">Waktu Pengiriman</label>
-                    <p th:text="${mahasiswa.namaDepan} + ' ' +  ${mahasiswa.namaBelakang}"></p>
+                    <p th:text="${pp.tanggalPengiriman}"></p>
+                  </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center">
+                  <div class="col-md-5">
+                    <label class="labels">Nama Penerima</label>
+                    <p th:text="${pp.namaPenerima}"></p>
+                  </div>
+                  <div class="col-md-5 mb-2">
+                    <label class="labels">Alamat Penerima</label>
+                    <p th:text="${pp.alamatPenerima}"></p>
+                  </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center">
+                  <div class="col-md-5">
+                    <label class="labels">Jenis Layanan</label>
+                    <p th:text="${jenisLayanan}"></p>
+                  </div>
+                  <div class="col-md-5 mb-2">
+                    <label class="labels">Biaya Pengiriman</label>
+                    <p th:text="${pp.biayaPengiriman}"></p>
                   </div>
                 </div>
               </div>
@@ -56,45 +85,40 @@
           <div class="row d-flex justify-content-center">
             <div class="row d-flex justify-content-center">
               <div class="col">
-                <h2>List Irs</h2>
-              </div>
-              <div class="col text-lg-end">
-                <a class="btn btn-primary" th:href="@{/mahasiswa/} + ${mahasiswa.npm} + @{/create-irs}">Tambah Irs</a>
+                <h2>List Barang</h2>
               </div>
             </div>
             <br />
             <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
               <div class="container">
-                <div th:if="${listIrs.size() != 0}">
+                <div th:if="${pp.listPermintaanPengirimanBarang.size() != 0}">
                   <div class="row d-flex justify-content-center">
                     <table class="content-table">
                       <thead>
                       <tr>
-                        <th style="text-align: center" scope="col">ID</th>
-                        <th style="text-align: center" scope="col">Semester</th>
-                        <th style="text-align: center" scope="col">Total SKS</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" style="vertical-align : middle;text-align:center;">Action</th>
+                        <th style="text-align: center" scope="col">#</th>
+                        <th style="text-align: center" scope="col">SKU</th>
+                        <th style="text-align: center" scope="col">Merk</th>
+                        <th style="text-align: center" scope="col">Kuantitas</th>
+                        <th style="text-align: center" scope="col">Total Harga</th>
                       </tr>
                       </thead>
-                      <tbody th:each= "irs, iterationStatus : ${listIrs}">
+                      <tbody th:each= "ppBarang, iterationStatus : ${pp.listPermintaanPengirimanBarang}">
                       <tr>
                         <th style="text-align: center" th:text="${iterationStatus.count}"></th>
-                        <td style="text-align: center" th:text="${irs.semester}"></td>
-                        <td style="text-align: center" th:text="${irs.jumlahSks} + ' SKS'"></td>
-                        <td th:text="${irs.status}"></td>
-                        <td style="vertical-align : middle;text-align:center;">
-                          <a class="btn btn-primary" th:href="@{/mahasiswa/} + ${mahasiswa.npm} + @{/} + ${irs.id}">Detail</a>
-                          <a class="btn btn-secondary" th:href="@{/mahasiswa/} + ${mahasiswa.npm} + @{/} + ${irs.id} + @{/update}">Edit</a>
-                        </td>
+                        <td style="text-align: center" th:text="${ppBarang.barang.sku}"></td>
+                        <td style="text-align: center" th:text="${ppBarang.barang.merk}"></td>
+                        <td style="text-align: center" th:text="${ppBarang.kuantitasPengiriman}"></td>
+                        <td style="text-align: center" th:text="${ppService.calculateTotal(ppBarang)}"></td>
+                       
                       </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div th:unless="${listIrs.size() != 0}">
+                <div th:unless="${pp.listPermintaanPengirimanBarang.size() != 0}">
                   <div class="mt-5 justify-content-center" style="padding-bottom: 3%">
-                    <h5 class="text-center text-warning" th:text="'--Belum ada IRS yang terdaftar--'"></h5>
+                    <h5 class="text-center text-warning" th:text="'--Belum ada barang yang terdaftar--'"></h5>
                   </div>
                 </div>
               </div>

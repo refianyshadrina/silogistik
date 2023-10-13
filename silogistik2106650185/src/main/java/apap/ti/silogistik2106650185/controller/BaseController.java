@@ -30,6 +30,8 @@ public class BaseController {
         model.addAttribute("jumlahGudang", gudangService.getCountGudang());
         model.addAttribute("jumlahBarang", barangService.getCountBarang());
         model.addAttribute("jumlahKaryawan", karyawanService.getCountKaryawan());
+        model.addAttribute("jumlahPP", permintaanPengirimanService.getCountJumlahPP());
+        model.addAttribute("page", "home");
         return "home";
     }
 }

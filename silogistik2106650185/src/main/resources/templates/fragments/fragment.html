@@ -15,6 +15,9 @@
         <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet">
         <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
 </head>
 <body>
@@ -29,11 +32,19 @@
 
         <nav th:fragment="navbar" id="navbar" class="navbar order-last order-lg-0">
             <ul>
-                <li class="nav-item"><a class="nav-link" th:href="@{/}"><span>Home</span></a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/gudang}"><span>Gudang</span></a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/barang}"><span>Barang</span></a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/permintaan-pengiriman}"><span>Permintaan Pengiriman</span></a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/karyawan}"><span>Karyawan</span></a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${page} == 'home' ? active : ''" th:href="@{/}"><span>Home</span></a></li>
+                <li class="nav-item dropdrown">
+                    <a class="nav-link dropdown-toggle" th:classappend="${page} == 'gudang' ? 'active' : ''" h:href="@{/gudang}" id="gudangDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Gudang</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="gudangDropdown">
+                        <a class="dropdown-item" th:href="@{/gudang}">Daftar Gudang</a>
+                        <a class="dropdown-item" th:href="@{/gudang/cari-barang}">Cari Barang</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${page} == 'barang' ? active : ''" th:href="@{/barang}"><span>Barang</span></a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${page} == 'permintaanpengiriman' ? active : ''" th:href="@{/permintaan-pengiriman}"><span>Permintaan Pengiriman</span></a></li>
+                
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

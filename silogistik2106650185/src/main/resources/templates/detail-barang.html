@@ -24,9 +24,13 @@
           <div class="row d-flex justify-content-center">
             <div class="col-md-5">
               <div class="new_card p-3 py-5">
-                <div class="row d-flex justify-content-center">
+                  <div class="row d-flex justify-content-center">
                     <div class="col-md-5">
                       <h2>Detail Barang</h2>
+                    </div>
+                    <div class="col text-lg-end">
+                      <!-- th:href="@{/barang/{sku}(sku=${barang.sku})}" -->
+                      <a class="btn btn-primary" th:href="@{/barang/{sku}/ubah(sku=${barang.sku})}"><i class="ri-add-line" style="font-size: small"></i>Ubah</a>
                     </div>
                   </div>
                 <div class="row mt-5 d-flex justify-content-center">

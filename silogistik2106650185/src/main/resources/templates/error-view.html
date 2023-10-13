@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Error</title>
+
+    <object th:include="fragments/fragment :: fonts" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+</head>
+
+<body>
+<header th:replace="fragments/fragment :: header"></header>
+<section id="breadcrumbs" class="breadcrumbs">
+<div class="row d-flex mx-3 justify-content-">
+    <a href="/">
+    <i class="ri-arrow-left-s-line">Kembali</i>
+    </a>
+</div>
+<main id="main">
+    <section>
+    <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
+        <!-- <div class="container"> -->
+            <div class="card m-4 p-4">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h2 th:text="${errorMessage}"></h2>
+                    </div>
+                    <div class="text-center m-3">
+                        <a type="button" class="btn btn-md btn-primary" href="/">Home</a>
+                        <div th:if="${page == 'barang'}">
+                            <a type="button" class="btn btn-md btn-primary" href="/barang">Lihat Semua Barang</a>
+                        </div>
+                        <div th:if="${page == 'permintaanpengiriman'}">
+                            <a type="button" class="btn btn-md btn-primary" href="/permintaan-pengiriman">Lihat semua permintaan pengiriman</a>
+                        </div>
+                        <div th:unless="${page == 'permintaanpengiriman'}">
+                            <a type="button" class="btn btn-md btn-primary" href="/barang">Lihat Semua Barang</a>
+                        </div>
+                    
+                    </div>
+                </div>
+            <!-- </div> -->
+        </div>
+    </section>
+    </main>
+</section>
+</div>
+</body>
+
+</html>
