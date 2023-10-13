@@ -1,4 +1,5 @@
 package apap.ti.silogistik2106650185.controller;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,21 +85,27 @@ public class BarangController {
     @PostMapping("/tambah")
     public String addBarang(@Valid @ModelAttribute CreateBarangReqDTO barangDTO,BindingResult bindingResult,  Model model) {
 
-        // if (bindingResult.hasErrors()) {
-        //     List<ObjectError> errors = bindingResult.getAllErrors();
-        //     List<String> errorMessage = new ArrayList<>();
-        //     for (ObjectError error : errors) {
-        //         errorMessage.add(error.getDefaultMessage());
-        //     }
-        //     model.addAttribute("errorMessage",errorMessage);
-        //     return "error-view";
-        // }
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            List<String> errorMessage = new ArrayList<>();
+            for (ObjectError error : errors) {
+                errorMessage.add(error.getDefaultMessage());
+            }
+            model.addAttribute("errorMessage",errorMessage);
+            List<Barang> listBarang = barangService.getAllBarang();
+            model.addAttribute("listBarang", listBarang);
+            model.addAttribute("page", "barang");
+            return "error-view";
+        }
 
-        // if (barangService.isMerkExist(barangDTO.getMerk())) {
-        //     var errorMessage = "";
-        //     model.addAttribute("errorMessage", errorMessage);
-        //     return "error-view";
-        // }
+        if (barangService.isMerkExist(barangDTO.getMerk())) {
+            var errorMessage = "Barang dengan merk tersebut sudah pernah ditambahkan.";
+            model.addAttribute("errorMessage", errorMessage);
+            List<Barang> listBarang = barangService.getAllBarang();
+            model.addAttribute("listBarang", listBarang);
+            model.addAttribute("page", "barang");
+            return "error-view";
+        }
 
         var barang = barangMapper.createBarangReqDTOToBarang(barangDTO);
         barangService.generateSKU(barang);
@@ -137,14 +144,20 @@ public class BarangController {
                 errorMessage += (error.getDefaultMessage()) + ("\n");
             }
             model.addAttribute("errorMessage", errorMessage.toString());
+            model.addAttribute("page", "barang");
+            List<Barang> listBarang = barangService.getAllBarang();
+            model.addAttribute("listBarang", listBarang);
             return "error-view";
         }
 
-        // if (barangService.isMerkExist(barangDTO.getMerk())) {
-        //     var errorMessage = "";
-        //     model.addAttribute("errorMessage", errorMessage);
-        //     return "error-view";
-        // }
+        if (barangService.isMerkExist(barangDTO.getMerk(), barangDTO.getSku())) {
+            var errorMessage = "Barang dengan merk tersebut sudah pernah ditambahkan.";
+            model.addAttribute("errorMessage", errorMessage);
+            model.addAttribute("page", "barang");
+            List<Barang> listBarang = barangService.getAllBarang();
+            model.addAttribute("listBarang", listBarang);
+            return "error-view";
+        }
         
         var barangFromDTO = barangMapper.UpdateBarangReqDTOToBarang(barangDTO);
 

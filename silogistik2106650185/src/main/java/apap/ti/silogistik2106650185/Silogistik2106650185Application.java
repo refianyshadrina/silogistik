@@ -1,6 +1,5 @@
 package apap.ti.silogistik2106650185;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Random;
 
@@ -15,7 +14,6 @@ import com.github.javafaker.Faker;
 import apap.ti.silogistik2106650185.dto.BarangMapper;
 import apap.ti.silogistik2106650185.dto.GudangMapper;
 import apap.ti.silogistik2106650185.dto.KaryawanMapper;
-import apap.ti.silogistik2106650185.dto.request.CreateBarangReqDTO;
 import apap.ti.silogistik2106650185.dto.request.CreateGudangReqDTO;
 import apap.ti.silogistik2106650185.dto.request.CreateKaryawanReqDTO;
 import apap.ti.silogistik2106650185.service.BarangService;
@@ -34,15 +32,15 @@ public class Silogistik2106650185Application {
 	CommandLineRunner run(GudangService gudangService, GudangMapper gudangMapper, KaryawanService karyawanService, KaryawanMapper karyawanMapper, BarangService barangService, BarangMapper barangMapper) {
 		
 		return args -> {
-			for (int i = 0; i<3; i++) {
+			var faker = new Faker(new Locale("in-ID"));
+			Random random = new Random();
 
-				var faker = new Faker(new Locale("in-ID"));
+			for (int i = 0; i<1; i++) {
 	
 				// GUDANG
 				var gudangDTO = new CreateGudangReqDTO();
 				var fakeAddress = faker.address();
 	
-				Random random = new Random();
 				int min = 1;
 				int max = 100;
 				var randomInteger = random.nextInt(max - min) + min;
@@ -52,7 +50,10 @@ public class Silogistik2106650185Application {
 	
 				var gudang = gudangMapper.createGudangReqDTOToGudang(gudangDTO);
 				gudangService.saveGudang(gudang);
+			
+			}
 
+			for (int i = 0; i<3; i++) {
 				// KARYAWAN
 				var karyawanDTO = new CreateKaryawanReqDTO();
 				karyawanDTO.setNama(faker.name().fullName());

@@ -121,5 +121,15 @@ public class BarangServiceImpl implements BarangService {
         }
         return stok;
     }
+
+    @Override
+    public boolean isMerkExist(String merk) {
+        return getAllBarang().stream().anyMatch(b -> b.getMerk().equalsIgnoreCase(merk));
+    }
+
+    @Override 
+    public boolean isMerkExist(String merk, String sku) {
+        return getAllBarang().stream().anyMatch(b -> b.getMerk().equalsIgnoreCase(merk) && !b.getSku().equals(sku));
+    }
     
 }

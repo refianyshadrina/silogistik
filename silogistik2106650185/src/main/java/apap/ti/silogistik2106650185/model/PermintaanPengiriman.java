@@ -1,5 +1,6 @@
 package apap.ti.silogistik2106650185.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="permintaan_pengiriman")
-@SQLDelete(sql = "UPDATE permintaan_pengiriman SET is_cancelled = true WHERE id=?")
+@SQLDelete(sql = "UPDATE permintaan_pengiriman SET is_cancelled = true WHERE id_permintaan_pengiriman=?")
 @Where(clause = "is_cancelled=false")
 public class PermintaanPengiriman {
     @Id
@@ -21,7 +22,6 @@ public class PermintaanPengiriman {
     private Long idPermintaanPengiriman;
 
     @NotNull
-    @Size(max=16, min=16)
     @Column(name="nomor_pengiriman", nullable = false)
     private String nomorPengiriman;
 
@@ -43,10 +43,9 @@ public class PermintaanPengiriman {
 
     @NotNull
     @Column(name="biaya_pengiriman", nullable = false)
-    private int biayaPengiriman;
+    private BigDecimal biayaPengiriman;
 
     @NotNull
-    @Size(max=4)
     @Column(name="jenis_layanan", nullable = false)
     private int jenisLayanan;
 
@@ -64,7 +63,7 @@ public class PermintaanPengiriman {
 
     public PermintaanPengiriman(Long idPermintaanPengiriman, @NotNull @Size(max = 16, min = 16) String nomorPengiriman,
             @NotNull boolean isCancelled, @NotNull String namaPenerima, @NotNull String alamatPenerima,
-            @NotNull Date tanggalPengiriman, @NotNull int biayaPengiriman, @NotNull @Size(max = 4) int jenisLayanan,
+            @NotNull Date tanggalPengiriman, @NotNull BigDecimal biayaPengiriman, @NotNull @Size(max = 4) int jenisLayanan,
             @NotNull LocalDateTime waktuPermintaan, Karyawan karyawan,
             List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
         this.idPermintaanPengiriman = idPermintaanPengiriman;
@@ -131,11 +130,11 @@ public class PermintaanPengiriman {
         this.tanggalPengiriman = tanggalPengiriman;
     }
 
-    public int getBiayaPengiriman() {
+    public BigDecimal getBiayaPengiriman() {
         return biayaPengiriman;
     }
 
-    public void setBiayaPengiriman(int biayaPengiriman) {
+    public void setBiayaPengiriman(BigDecimal biayaPengiriman) {
         this.biayaPengiriman = biayaPengiriman;
     }
 

@@ -185,7 +185,7 @@ h2 span {
 }
 
 .get-started-btn:hover {
-  background: #38ff67;
+  background: #3ea27d;
   color: #343a40;
 }
 
@@ -218,7 +218,17 @@ h2 span {
   position: relative;
 }
 
-.navbar a,
+.navbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fde088;
+  white-space: nowrap;
+  transition: 0.3s;
+}
 .navbar a:focus {
   display: flex;
   align-items: center;
@@ -226,7 +236,7 @@ h2 span {
   padding: 10px 0 10px 30px;
   font-size: 15px;
   font-weight: 600;
-  color: #fff;
+  color: #3ea27d;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -254,8 +264,8 @@ h2 span {
   padding: 10px 0;
   z-index: 99;
   opacity: 0;
-  visibility: hidden;
-  background: #fff;
+  visibility: visible;
+  background: #e0e66b;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
@@ -291,7 +301,7 @@ h2 span {
 .navbar .dropdown .dropdown ul {
   top: 0;
   left: calc(100% - 30px);
-  visibility: hidden;
+  visibility: visible;
 }
 
 .navbar .dropdown .dropdown:hover>ul {
@@ -391,7 +401,7 @@ h2 span {
   z-index: 99;
   opacity: 1;
   visibility: visible;
-  background: #fff;
+  background: #64d5b7;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
 }
 
@@ -1352,7 +1362,7 @@ section {
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #6bff97;
+  background: #3ea27d;
 }
 
 @-webkit-keyframes animate-loading {
