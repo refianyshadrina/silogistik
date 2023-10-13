@@ -25,4 +25,8 @@ public interface BarangService {
     int calculateStock(Barang barang);
 
     Long getCountBarang();
+
+    boolean isMerkExist(String merk);
+
+    boolean isMerkExist(String merk, String sku);
 }

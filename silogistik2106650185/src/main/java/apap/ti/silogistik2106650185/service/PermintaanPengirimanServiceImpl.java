@@ -1,5 +1,6 @@
 package apap.ti.silogistik2106650185.service;
 
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -113,8 +114,13 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
     }
 
     @Override
-    public Long calculateTotal(PermintaanPengirimanBarang ppBarang) {
-        return ppBarang.getKuantitasPengiriman() * ppBarang.getBarang().getHargaBarang();
+    public BigDecimal calculateTotal(PermintaanPengirimanBarang ppBarang) {
+        int kuantitas = ppBarang.getKuantitasPengiriman();
+        BigDecimal harga = ppBarang.getBarang().getHargaBarang();
+
+        BigDecimal total = BigDecimal.valueOf(kuantitas).multiply(harga);
+
+        return total;
     }
     
 }

@@ -1,9 +1,12 @@
 package apap.ti.silogistik2106650185.dto.request;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import apap.ti.silogistik2106650185.model.GudangBarang;
 import apap.ti.silogistik2106650185.model.PermintaanPengirimanBarang;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -15,9 +18,11 @@ public class CreateBarangReqDTO {
     // @Size(max=5)
     private int tipeBarang;
 
+    @NotBlank(message = "Merk barang harus diisi")
     private String merk;
 
-    private Long hargaBarang;
+    @PositiveOrZero(message = "Mohon periksa kembali input harga Anda")
+    private BigDecimal hargaBarang;
 
     private List<GudangBarang> listGudangBarang;
     
@@ -25,7 +30,7 @@ public class CreateBarangReqDTO {
 
     
 
-    public CreateBarangReqDTO(@Size(max = 5) int tipeBarang, String merk, Long hargaBarang,
+    public CreateBarangReqDTO(@Size(max = 5) int tipeBarang, String merk, BigDecimal hargaBarang,
             List<GudangBarang> listGudangBarang, List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
 
         this.tipeBarang = tipeBarang;
@@ -62,11 +67,11 @@ public class CreateBarangReqDTO {
         this.merk = merk;
     }
 
-    public Long getHargaBarang() {
+    public BigDecimal getHargaBarang() {
         return hargaBarang;
     }
 
-    public void setHargaBarang(Long hargaBarang) {
+    public void setHargaBarang(BigDecimal hargaBarang) {
         this.hargaBarang = hargaBarang;
     }
 

@@ -1,5 +1,6 @@
 package apap.ti.silogistik2106650185.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import apap.ti.silogistik2106650185.model.PermintaanPengiriman;
@@ -23,6 +24,6 @@ public interface PermintaanPengirimanService {
 
     void create(PermintaanPengiriman ppFromDto,  List<PermintaanPengirimanBarang> permintaanPengirimanBarangs);
 
-    Long calculateTotal(PermintaanPengirimanBarang ppBarang);
+    BigDecimal calculateTotal(PermintaanPengirimanBarang ppBarang);
     
 }

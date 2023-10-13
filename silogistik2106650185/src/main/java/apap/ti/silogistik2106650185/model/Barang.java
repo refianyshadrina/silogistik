@@ -1,5 +1,6 @@
 package apap.ti.silogistik2106650185.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ public class Barang {
 
     @NotNull
     @Column(name="harga_barang", nullable = false)
-    private Long hargaBarang;
+    private BigDecimal hargaBarang;
 
     @OneToMany(mappedBy = "barang", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<GudangBarang> listGudangBarang;
@@ -55,11 +56,11 @@ public class Barang {
         this.merk = merk;
     }
 
-    public Long getHargaBarang() {
+    public BigDecimal getHargaBarang() {
         return hargaBarang;
     }
 
-    public void setHargaBarang(Long hargaBarang) {
+    public void setHargaBarang(BigDecimal hargaBarang) {
         this.hargaBarang = hargaBarang;
     }
 
@@ -82,7 +83,7 @@ public class Barang {
     public Barang() {
     }
 
-    public Barang(String sku, @NotNull @Size(max = 5) int tipeBarang, @NotNull String merk, @NotNull Long hargaBarang,
+    public Barang(String sku, @NotNull @Size(max = 5) int tipeBarang, @NotNull String merk, @NotNull BigDecimal hargaBarang,
             List<GudangBarang> listGudangBarang, List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
         this.sku = sku;
         this.tipeBarang = tipeBarang;

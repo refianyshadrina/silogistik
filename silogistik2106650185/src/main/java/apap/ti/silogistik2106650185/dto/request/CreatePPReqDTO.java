@@ -1,11 +1,14 @@
 package apap.ti.silogistik2106650185.dto.request;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import java.util.List;
 
 import apap.ti.silogistik2106650185.model.Karyawan;
 import apap.ti.silogistik2106650185.model.PermintaanPengirimanBarang;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
@@ -15,13 +18,17 @@ public class CreatePPReqDTO {
 
     private boolean isCancelled;
 
+    @NotBlank(message = "Nama penerima tidak boleh kosong")
     private String namaPenerima;
 
+    @NotBlank(message = "Alamat penerima tidak boleh kosong")
     private String alamatPenerima;
 
+    @NotBlank(message = "Tanggal pengiriman tidak boleh kosong")
     private String tanggalKirim;
 
-    private int biayaPengiriman;
+    @PositiveOrZero(message = "Mohon periksa kembali input biaya pengiriman Anda")
+    private BigDecimal biayaPengiriman;
 
     private int jenisLayanan;
 
@@ -71,11 +78,11 @@ public class CreatePPReqDTO {
         this.tanggalKirim = tanggalKirim;
     }
 
-    public int getBiayaPengiriman() {
+    public BigDecimal getBiayaPengiriman() {
         return biayaPengiriman;
     }
 
-    public void setBiayaPengiriman(int biayaPengiriman) {
+    public void setBiayaPengiriman(BigDecimal biayaPengiriman) {
         this.biayaPengiriman = biayaPengiriman;
     }
 
@@ -112,7 +119,7 @@ public class CreatePPReqDTO {
     }
 
     public CreatePPReqDTO(String nomorPengiriman, boolean isCancelled, String namaPenerima, String alamatPenerima,
-            String tanggalKirim, int biayaPengiriman, int jenisLayanan, LocalDateTime waktuPermintaan,
+            String tanggalKirim, BigDecimal biayaPengiriman, int jenisLayanan, LocalDateTime waktuPermintaan,
             Karyawan karyawan, List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
         this.nomorPengiriman = nomorPengiriman;
         this.isCancelled = isCancelled;
@@ -155,7 +162,15 @@ public class CreatePPReqDTO {
                 return false;
         } else if (!alamatPenerima.equals(other.alamatPenerima))
             return false;
-        if (biayaPengiriman != other.biayaPengiriman)
+        if (tanggalKirim == null) {
+            if (other.tanggalKirim != null)
+                return false;
+        } else if (!tanggalKirim.equals(other.tanggalKirim))
+            return false;
+        if (biayaPengiriman == null) {
+            if (other.biayaPengiriman != null)
+                return false;
+        } else if (!biayaPengiriman.equals(other.biayaPengiriman))
             return false;
         if (jenisLayanan != other.jenisLayanan)
             return false;
@@ -185,7 +200,8 @@ public class CreatePPReqDTO {
         result = prime * result + (isCancelled ? 1231 : 1237);
         result = prime * result + ((namaPenerima == null) ? 0 : namaPenerima.hashCode());
         result = prime * result + ((alamatPenerima == null) ? 0 : alamatPenerima.hashCode());
-        result = prime * result + biayaPengiriman;
+        result = prime * result + ((tanggalKirim == null) ? 0 : tanggalKirim.hashCode());
+        result = prime * result + ((biayaPengiriman == null) ? 0 : biayaPengiriman.hashCode());
         result = prime * result + jenisLayanan;
         result = prime * result + ((waktuPermintaan == null) ? 0 : waktuPermintaan.hashCode());
         result = prime * result + ((karyawan == null) ? 0 : karyawan.hashCode());
@@ -193,6 +209,8 @@ public class CreatePPReqDTO {
                 + ((listPermintaanPengirimanBarang == null) ? 0 : listPermintaanPengirimanBarang.hashCode());
         return result;
     }
+
+    
 
 
 
