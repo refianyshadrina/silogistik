@@ -115,6 +115,7 @@ public class GudangController {
     public String postRestock(@ModelAttribute RestockGudangReqDTO gudangDTO, Model model) {
         var gudangFromDTO = gudangMapper.restockGudangReqDTOToGudang(gudangDTO);
 
+
         for (GudangBarang gudangBarang : gudangFromDTO.getListGudangBarang()) {
             gudangBarang.setGudang(gudangService.getGudangById(gudangFromDTO.getIdGudang()));
             // gudangBarang.getBarang().setListGudangBarang(gudangFromDTO.getListGudangBarang());
@@ -161,6 +162,8 @@ public class GudangController {
         model.addAttribute("listGudang", listGudang);
         model.addAttribute("listBarangExisting", listBarangExisting);
         model.addAttribute("page", "gudang");
+        model.addAttribute("barangCari", barangService.getBarangBySKU(sku));
+        model.addAttribute("barangService", barangService);
         return "cari-barang";
     }
 

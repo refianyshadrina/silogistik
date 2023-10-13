@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Cari Barang</title>
+    <title>Filter Permintaan Pengiriman</title>
 
     <object th:include="fragments/fragment :: fonts" th:remove="tag"></object>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
@@ -18,9 +18,9 @@
             <div class="container-fluid" style="padding-bottom: 4%; display: flex; align-items: center; justify-content: center;">
                 <div class="container" data-aos="fade-up">
                     <div class="d-flex justify-content-center mb-4">
-                        <h2 class="text-center">Cari Barang</h2>
+                        <h2 class="text-center">Filter Permintaan Pengiriman</h2>
                     </div>
-                    <form th:action="@{/gudang/cari-barang}" method="GET">
+                    <form th:action="@{/filter-permintaan-pengiriman}" method="GET">
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-7">
                                 <div class="row d-flex justify-content-center">
@@ -28,9 +28,21 @@
                                         <div class="col-md-10">
                                             <label class="labels">Merk Barang</label>
                                             <select class="form-control" name="sku">
-                                                <option th:each="barang : ${listBarangExisting}" th:value="${barang.sku}" th:text="${barang.merk}" ></option>
+                                                <option th:each="barang : ${listBarangExisting}" th:value="${barang.sku}" th:text="${barang.merk}"></option>
                                                 <option th:value="${barangCari.sku}" th:text="${barangCari.merk}" selected></option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-md-10">
+                                            <label class="labels">Tanggal Awal</label>
+                                            <input class="form-control" th:value="${startDate}" type="date" name="startDate" />
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-md-10">
+                                            <label class="labels">Tanggal Akhir</label>
+                                            <input class="form-control" th:value="${endDate}" type="date" name="endDate" />
                                         </div>
                                     </div>
                                     <div class="mt-4 text-center">
@@ -45,11 +57,11 @@
                     </form>
 
                     <br />
-                    <div th:if="${listGudangBarang.size() != 0}">
+                    <div th:if="${listPPFiltered.size() != 0}">
                         <hr/>
 
                         <div class="row d-flex justify-content-center">
-                            <h4>List Gudang</h4>
+                            <h4>List Permintaan Pengiriman</h4>
                             <br />
                             <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
                                 <div class="container">
@@ -58,17 +70,21 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">No</th>
-                                                <th scope="col">Nama</th>
-                                                <th scope="col">Alamat Gudang</th>
-                                                <th scope="col">Stok</th>
+                                                <th scope="col">Waktu Permintaan</th>
+                                                <th scope="col">Nomor Pengiriman</th>
+                                                <th scope="col">Nama Penerima</th>
+                                                <th scope="col">Alamat Penerima</th>
+                                                <th scope="col">Tanggal Pengiriman</th>
                                             </tr>
                                             </thead>
-                                            <tbody th:each="gudangBarang, iterationStatus : ${listGudangBarang}">
+                                            <tbody th:each="ppBarang, iterationStatus : ${listPPFiltered}">
                                             <tr>
                                                 <th scope="row" th:text="${iterationStatus.count}"></th>
-                                                <td ><a th:href="@{/gudang/{id}(id=${gudangBarang.gudang.idGudang})}" th:text="${gudangBarang.gudang.nama}"></a></td>
-                                                <td th:text="${gudangBarang.gudang.alamatGudang}"></td>
-                                                <td th:text="${gudangBarang.stok}"></td>
+                                                <td th:text="${ppBarang.permintaanPengiriman.waktuPermintaan}"></td>
+                                                <td ><a th:href="@{/permintaan-pengiriman}" th:text="${ppBarang.permintaanPengiriman.nomorPengiriman}"></a></td>
+                                                <td th:text="${ppBarang.permintaanPengiriman.namaPenerima}"></td>
+                                                <td th:text="${ppBarang.permintaanPengiriman.alamatPenerima}"></td>
+                                                <td th:text="${ppBarang.permintaanPengiriman.tanggalPengiriman}"></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -77,39 +93,16 @@
                             </div>
                         </div>
                     </div>
-                    <div th:unless="${listGudangBarang.size() != 0}">
+                    <div th:unless="${listPPFiltered.size() != 0}">
                         <div th:if="${search.equals(true)}">
                             <hr />
                             <div class="mt-5 justify-content-center">
-                                <h5 class="text-center text-danger" th:text="'--Tidak ditemukan gudang berdasarkan barang merk ' + ${barangCari.merk} + ' --'"></h5>
+                                <h5 class="text-center text-danger" th:text="'--Tidak ditemukan permintaan pengiriman berdasarkan barang merk ' + ${barangCari.merk} + ' dan/atau dengan range tanggal tersebut--'"></h5>
                             </div>
                         </div>
                         <div th:unless="${search.equals(true)}">
                             <div class="row d-flex justify-content-center">
-                                <h4>List Gudang</h4>
-                                <!-- <br />
-                                <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
-                                    <div class="container">
-                                        <div class="row d-flex justify-content-center">
-                                            <table class="content-table">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Alamat Gudang</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody th:each="gudang, iterationStatus : ${listGudang}">
-                                                <tr>
-                                                    <th scope="row" th:text="${iterationStatus.count}"></th>
-                                                    <td th:text="${gudang.nama}"></td>
-                                                    <td th:text="${gudang.alamatGudang}"></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                <h4>List Permintaan Pengiriman</h4>
                             </div>
                         </div>
                     </div>

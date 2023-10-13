@@ -3,7 +3,9 @@ package apap.ti.silogistik2106650185.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,14 +129,12 @@ public class PermintaanPengirimanController {
 
         var ppFromDto = ppMapper.createPPReqDTOToPermintaanPengiriman(ppDTO);
 
-        Date parsedDate;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            parsedDate = dateFormat.parse(ppDTO.gettanggalKirim());
-            ppFromDto.setTanggalPengiriman(parsedDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        LocalDate parsedDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        parsedDate = LocalDate.parse(ppDTO.gettanggalKirim(), formatter);
+        ppFromDto.setTanggalPengiriman(parsedDate);
+        
         ppFromDto.setListPermintaanPengirimanBarang(new ArrayList<>());
         LocalDateTime currentDateTime = LocalDateTime.now();
         ppFromDto.setNomorPengiriman("temp");
@@ -226,5 +226,8 @@ public class PermintaanPengirimanController {
             return "error-view";
         }
     }
+
+
+    
     
 }

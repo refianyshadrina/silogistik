@@ -1,6 +1,7 @@
 package apap.ti.silogistik2106650185.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class PermintaanPengiriman {
 
     @NotNull
     @Column(name="tanggal_pengiriman", nullable = false)
-    private Date tanggalPengiriman;
+    private LocalDate tanggalPengiriman;
 
     @NotNull
     @Column(name="biaya_pengiriman", nullable = false)
@@ -63,7 +64,7 @@ public class PermintaanPengiriman {
 
     public PermintaanPengiriman(Long idPermintaanPengiriman, @NotNull @Size(max = 16, min = 16) String nomorPengiriman,
             @NotNull boolean isCancelled, @NotNull String namaPenerima, @NotNull String alamatPenerima,
-            @NotNull Date tanggalPengiriman, @NotNull BigDecimal biayaPengiriman, @NotNull @Size(max = 4) int jenisLayanan,
+            @NotNull LocalDate tanggalPengiriman, @NotNull BigDecimal biayaPengiriman, @NotNull @Size(max = 4) int jenisLayanan,
             @NotNull LocalDateTime waktuPermintaan, Karyawan karyawan,
             List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
         this.idPermintaanPengiriman = idPermintaanPengiriman;
@@ -122,11 +123,11 @@ public class PermintaanPengiriman {
         this.alamatPenerima = alamatPenerima;
     }
 
-    public Date getTanggalPengiriman() {
+    public LocalDate getTanggalPengiriman() {
         return tanggalPengiriman;
     }
 
-    public void setTanggalPengiriman(Date tanggalPengiriman) {
+    public void setTanggalPengiriman(LocalDate tanggalPengiriman) {
         this.tanggalPengiriman = tanggalPengiriman;
     }
 
