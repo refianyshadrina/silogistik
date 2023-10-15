@@ -15,7 +15,7 @@ import jakarta.validation.constraints.*;
 @Entity
 @Table(name="permintaan_pengiriman")
 @SQLDelete(sql = "UPDATE permintaan_pengiriman SET is_cancelled = true WHERE id_permintaan_pengiriman=?")
-@Where(clause = "is_cancelled=false")
+// @Where(clause = "is_cancelled=false")
 public class PermintaanPengiriman {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

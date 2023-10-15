@@ -1,4 +1,6 @@
-# Tugas Individu APAP Silogistik
+# Tugas Individu APAP
 
-## Author
+## Authors
 * **<Refiany Shadrina>** - *<2106650185>* - *<A>* 
+
+## Collaborators

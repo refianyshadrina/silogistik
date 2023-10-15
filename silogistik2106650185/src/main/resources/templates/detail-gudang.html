@@ -69,7 +69,7 @@
                               <tbody th:each= "barang, iterationStatus : ${listBarang}">
                               <tr>
                                   <td style="text-align: center" th:text="${iterationStatus.count}"></td>
-                                  <td style="text-align: center" th:text="${barang.sku}"></td>
+                                  <td style="text-align: center"><a th:href="@{/barang/{sku}(sku=${barang.sku})}" th:text="${barang.sku}"></a></td>
                                   <td style="text-align: center" th:text="${barang.merk}"></td>
                                   <div th:if="${gudang.listGudangBarang.size() == 0}">
                                       <td >0</td>
@@ -87,7 +87,7 @@
                         </div>
                         <div th:unless="${gudang.listGudangBarang.size() != 0}">
                           <div class="mt-5 justify-content-center" style="padding-bottom: 3%">
-                            <h5 class="text-center text-warning" th:text="'--Belum ada barang yang terdaftar--'"></h5>
+                            <h5 class="text-center text-warning" th:text="'--Belum ada barang pada gudang--'"></h5>
                           </div>
                         </div>
                       </div>

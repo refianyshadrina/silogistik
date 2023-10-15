@@ -93,7 +93,7 @@
                               <tr>
                                 <!-- <th style="text-align: center" th:text="${iterationStatus.count}"></th> -->
                                 <td style="text-align: center" th:text="${iterationStatus.count}"></td>
-                                  <td style="text-align: center" th:text="${gudangBarang.gudang.nama}"></td>
+                                <td ><a th:href="@{/gudang/{id}(id=${gudangBarang.gudang.idGudang})}" th:text="${gudangBarang.gudang.nama}"></a></td>
                                   <td style="text-align: center" th:text="${gudangBarang.gudang.alamatGudang}"></td>
                                   <div th:if="${gudangBarang.gudang.listGudangBarang.size() == 0}">
                                       <td >0</td>

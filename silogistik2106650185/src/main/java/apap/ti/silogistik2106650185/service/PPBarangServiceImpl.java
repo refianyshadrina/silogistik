@@ -28,7 +28,7 @@ public class PPBarangServiceImpl implements PPBarangService {
     @Override
     public boolean cekStok(List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang) {
         for (PermintaanPengirimanBarang ppBarang : listPermintaanPengirimanBarang) {
-            if (ppBarang.getKuantitasPengiriman() >= barangService.calculateStock(ppBarang.getBarang())) {
+            if (ppBarang.getKuantitasPengiriman() > barangService.calculateStock(ppBarang.getBarang())) {
                 return true;
             }
         }

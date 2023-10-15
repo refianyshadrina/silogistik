@@ -86,10 +86,8 @@
                                                         </td>
                                                         <td><input class="form-control" type="text" th:field="*{listGudangBarang[__${iterationStatus.index}__].stok}"/></td>
                                                         <td><input class="form-control" type="hidden" th:value="*{idGudang}" th:field="*{listGudangBarang[__${iterationStatus.index}__].gudang}" /></td>
-                                                        <!-- <td>
-                                                            <a th:value="${iterationStatus.index}" class="btn btn-danger" type="submit" name="deleteRow"><i class="ri-delete-bin-fill"></i></a>
-                                                        </td>
-                                                         -->
+                                                    
+                                                        
                                                     </tr>
                                                 </tbody>
                                                 </table>

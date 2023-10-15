@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import apap.ti.silogistik2106650185.service.KaryawanService;
 import apap.ti.silogistik2106650185.service.PPBarangService;
 import apap.ti.silogistik2106650185.service.PermintaanPengirimanService;
 import jakarta.validation.Valid;
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/permintaan-pengiriman")
@@ -51,7 +53,13 @@ public class PermintaanPengirimanController {
     @GetMapping("")
     public String viewAllPermintaanPengiriman(Model model) {
         List<PermintaanPengiriman> listPP = permintaanPengirimanService.getAllPermintaanPengiriman();
-        model.addAttribute("listPP", listPP);
+        List<PermintaanPengiriman> reversedList = new ArrayList<>();
+        ListIterator<PermintaanPengiriman> listIterator = listPP.listIterator(listPP.size());
+        while(listIterator.hasPrevious()){
+           PermintaanPengiriman element = listIterator.previous();
+           reversedList.add(element);
+        }
+        model.addAttribute("listPP", reversedList);
         model.addAttribute("page", "permintaanpengiriman");
         return "viewall-permintaanpengiriman";
     }
@@ -148,7 +156,13 @@ public class PermintaanPengirimanController {
         permintaanPengirimanService.create(ppFromDto, ppDTO.getListPermintaanPengirimanBarang());
 
         List<PermintaanPengiriman> listPP = permintaanPengirimanService.getAllPermintaanPengiriman();
-        model.addAttribute("listPP", listPP);
+        List<PermintaanPengiriman> reversedList = new ArrayList<>();
+        ListIterator<PermintaanPengiriman> listIterator = listPP.listIterator(listPP.size());
+        while(listIterator.hasPrevious()){
+           PermintaanPengiriman element = listIterator.previous();
+           reversedList.add(element);
+        }
+        model.addAttribute("listPP", reversedList);
         model.addAttribute("page", "permintaanpengiriman");
         return "viewall-permintaanpengiriman";
 

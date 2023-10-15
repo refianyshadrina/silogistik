@@ -113,15 +113,6 @@ public class GudangController {
         return "form-updatestock-gudang";
     }
 
-    // @PostMapping(value="/restock-barang", params = {"deleteRow"})
-    // public String deleteRow(@ModelAttribute RestockGudangReqDTO gudangDTO, @RequestParam("deleteRow") int row, Model model) {
-    //     gudangDTO.getListGudangBarang().remove(row);
-    //     model.addAttribute("gudangDTO", gudangDTO);
-
-    //     model.addAttribute("listBarang", barangService.getAllBarang());
-    //     model.addAttribute("page", "gudang");
-    //     return "form-updatestock-gudang";
-    // }
 
 
     @PostMapping(value = "/restock-barang")

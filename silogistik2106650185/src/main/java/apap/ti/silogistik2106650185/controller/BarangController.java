@@ -115,9 +115,10 @@ public class BarangController {
 
         List<Barang> listBarang = barangService.getAllBarang();
         model.addAttribute("listBarang", listBarang);
+        model.addAttribute("merk", barang.getMerk());
         model.addAttribute("barangService", barangService);
         model.addAttribute("page", "barang");
-        return "viewall-barang";
+        return "success-add";
 
     }
 
