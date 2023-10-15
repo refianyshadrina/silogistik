@@ -42,8 +42,17 @@
                         <a class="dropdown-item" th:href="@{/gudang/cari-barang}">Cari Barang</a>
                     </div>
                 </li>
+                <li class="nav-item dropdrown">
+                    <a class="nav-link dropdown-toggle" th:classappend="${page} == 'permintaanpengiriman' ? 'active' : ''" h:href="@{/permintaan-pengiriman}" id="ppDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Permintaan Pengiriman</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="ppDropdown">
+                        <a class="dropdown-item" th:href="@{/permintaan-pengiriman}">Lihat Semua</a>
+                        <a class="dropdown-item" th:href="@{/filter-permintaan-pengiriman}">Filter (Bonus)</a>
+                    </div>
+                </li>
                 <li class="nav-item"><a class="nav-link" th:classappend="${page} == 'barang' ? active : ''" th:href="@{/barang}"><span>Barang</span></a></li>
-                <li class="nav-item"><a class="nav-link" th:classappend="${page} == 'permintaanpengiriman' ? active : ''" th:href="@{/permintaan-pengiriman}"><span>Permintaan Pengiriman</span></a></li>
+                <!-- <li class="nav-item"><a class="nav-link" th:classappend="${page} == 'permintaanpengiriman' ? active : ''" th:href="@{/permintaan-pengiriman}"><span>Permintaan Pengiriman</span></a></li> -->
                 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

@@ -35,7 +35,7 @@ public class Silogistik2106650185Application {
 			var faker = new Faker(new Locale("in-ID"));
 			Random random = new Random();
 
-			for (int i = 0; i<1; i++) {
+			for (int i = 0; i<3; i++) {
 	
 				// GUDANG
 				var gudangDTO = new CreateGudangReqDTO();

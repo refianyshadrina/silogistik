@@ -18,6 +18,7 @@ import apap.ti.silogistik2106650185.dto.request.RestockGudangReqDTO;
 import apap.ti.silogistik2106650185.model.Barang;
 import apap.ti.silogistik2106650185.model.Gudang;
 import apap.ti.silogistik2106650185.model.GudangBarang;
+import apap.ti.silogistik2106650185.model.PermintaanPengirimanBarang;
 import apap.ti.silogistik2106650185.service.BarangService;
 import apap.ti.silogistik2106650185.service.GudangBarangService;
 import apap.ti.silogistik2106650185.service.GudangService;
@@ -83,6 +84,8 @@ public class GudangController {
             gudangDTO.getListGudangBarang().add(gudangBarang);
         }
 
+        System.out.println("Gudang Get: " + gudang.getListGudangBarang().size());
+        System.out.println("GudangDTO Get: " + gudangDTO.getListGudangBarang().size());
 
         model.addAttribute("gudangDTO", gudangDTO);
         model.addAttribute("listBarang", listBarangExisting);
@@ -110,22 +113,27 @@ public class GudangController {
         return "form-updatestock-gudang";
     }
 
+    // @PostMapping(value="/restock-barang", params = {"deleteRow"})
+    // public String deleteRow(@ModelAttribute RestockGudangReqDTO gudangDTO, @RequestParam("deleteRow") int row, Model model) {
+    //     gudangDTO.getListGudangBarang().remove(row);
+    //     model.addAttribute("gudangDTO", gudangDTO);
+
+    //     model.addAttribute("listBarang", barangService.getAllBarang());
+    //     model.addAttribute("page", "gudang");
+    //     return "form-updatestock-gudang";
+    // }
+
 
     @PostMapping(value = "/restock-barang")
     public String postRestock(@ModelAttribute RestockGudangReqDTO gudangDTO, Model model) {
+
         var gudangFromDTO = gudangMapper.restockGudangReqDTOToGudang(gudangDTO);
+    
+        gudangService.restock(gudangFromDTO, gudangDTO);
 
-
-        for (GudangBarang gudangBarang : gudangFromDTO.getListGudangBarang()) {
-            gudangBarang.setGudang(gudangService.getGudangById(gudangFromDTO.getIdGudang()));
-            // gudangBarang.getBarang().setListGudangBarang(gudangFromDTO.getListGudangBarang());
-            // barangService.restock(gudangBarang.getBarang());
+        for (GudangBarang gudangBarang : gudangService.getGudangById(gudangFromDTO.getIdGudang()).getListGudangBarang()) {
             gudangBarangService.saveGudangBarang(gudangBarang);
-
-            
         }
-
-        gudangService.restock(gudangFromDTO);
 
         List<Gudang> listGudang = gudangService.getAllGudang();
 
@@ -137,7 +145,11 @@ public class GudangController {
 
     @GetMapping("/cari-barang")
     public String cariBarang(@RequestParam(value = "sku", required = false) String sku,  Model model) {
-        List<Barang> listBarangExisting = barangService.getAllBarang();
+        List<Barang> listBarangExisting = new ArrayList<>();
+
+        if (barangService.getAllBarang() != null || barangService.getAllBarang().size() != 0) {
+            listBarangExisting = barangService.getAllBarang();
+        }
 
         List<Gudang> listGudang = new ArrayList<>();
         List<GudangBarang> listGudangBarang = new ArrayList<>();

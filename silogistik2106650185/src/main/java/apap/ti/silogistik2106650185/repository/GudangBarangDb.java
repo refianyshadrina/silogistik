@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface GudangBarangDb extends JpaRepository<GudangBarang, Long>{
-    
+
 }

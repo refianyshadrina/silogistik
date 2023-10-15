@@ -20,92 +20,113 @@
                     <div class="d-flex justify-content-center mb-4">
                         <h2 class="text-center">Filter Permintaan Pengiriman</h2>
                     </div>
-                    <form th:action="@{/filter-permintaan-pengiriman}" method="GET">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-7">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="row mt-3 d-flex justify-content-center">
-                                        <div class="col-md-10">
-                                            <label class="labels">Merk Barang</label>
-                                            <select class="form-control" name="sku">
-                                                <option th:each="barang : ${listBarangExisting}" th:value="${barang.sku}" th:text="${barang.merk}"></option>
-                                                <option th:value="${barangCari.sku}" th:text="${barangCari.merk}" selected></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3 d-flex justify-content-center">
-                                        <div class="col-md-10">
-                                            <label class="labels">Tanggal Awal</label>
-                                            <input class="form-control" th:value="${startDate}" type="date" name="startDate" />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3 d-flex justify-content-center">
-                                        <div class="col-md-10">
-                                            <label class="labels">Tanggal Akhir</label>
-                                            <input class="form-control" th:value="${endDate}" type="date" name="endDate" />
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 text-center">
-                                        <button class="btn btn-primary" type="submit">Search</button>
-                                    </div>
-                                    <div class="mt-3 text-center">
-                                        <a th:href="@{/gudang}" class="btn btn-danger">Kembali</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <br />
-                    <div th:if="${listPPFiltered.size() != 0}">
-                        <hr/>
-
-                        <div class="row d-flex justify-content-center">
-                            <h4>List Permintaan Pengiriman</h4>
-                            <br />
-                            <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
-                                <div class="container">
+                    <div th:if="${listBarangExisting.size() != 0}">
+                        <form th:action="@{/filter-permintaan-pengiriman}" method="GET">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-7">
                                     <div class="row d-flex justify-content-center">
-                                        <table class="content-table">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">No</th>
-                                                <th scope="col">Waktu Permintaan</th>
-                                                <th scope="col">Nomor Pengiriman</th>
-                                                <th scope="col">Nama Penerima</th>
-                                                <th scope="col">Alamat Penerima</th>
-                                                <th scope="col">Tanggal Pengiriman</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody th:each="ppBarang, iterationStatus : ${listPPFiltered}">
-                                            <tr>
-                                                <th scope="row" th:text="${iterationStatus.count}"></th>
-                                                <td th:text="${ppBarang.permintaanPengiriman.waktuPermintaan}"></td>
-                                                <td ><a th:href="@{/permintaan-pengiriman}" th:text="${ppBarang.permintaanPengiriman.nomorPengiriman}"></a></td>
-                                                <td th:text="${ppBarang.permintaanPengiriman.namaPenerima}"></td>
-                                                <td th:text="${ppBarang.permintaanPengiriman.alamatPenerima}"></td>
-                                                <td th:text="${ppBarang.permintaanPengiriman.tanggalPengiriman}"></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="row mt-3 d-flex justify-content-center">
+                                            <div class="col-md-10">
+                                                <label class="labels">Merk Barang</label>
+                                                <select class="form-control" name="sku">
+                                                    <option th:each="barang : ${listBarangExisting}" th:value="${barang.sku}" th:text="${barang.merk}"></option>
+                                                    <!-- <option th:value="${barangCari.sku}" th:text="${barangCari.merk}" selected></option> -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 d-flex justify-content-center">
+                                            <div class="col-md-10">
+                                                <label class="labels">Tanggal Awal</label>
+                                                <input class="form-control" th:value="${startDate}" type="date" name="startDate" />
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 d-flex justify-content-center">
+                                            <div class="col-md-10">
+                                                <label class="labels">Tanggal Akhir</label>
+                                                <input class="form-control" th:value="${endDate}" type="date" name="endDate" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 text-center">
+                                            <button class="btn btn-primary" type="submit">Search</button>
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <a th:href="@{/gudang}" class="btn btn-danger">Kembali</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div th:unless="${listPPFiltered.size() != 0}">
-                        <div th:if="${search.equals(true)}">
-                            <hr />
-                            <div class="mt-5 justify-content-center">
-                                <h5 class="text-center text-danger" th:text="'--Tidak ditemukan permintaan pengiriman berdasarkan barang merk ' + ${barangCari.merk} + ' dan/atau dengan range tanggal tersebut--'"></h5>
-                            </div>
-                        </div>
-                        <div th:unless="${search.equals(true)}">
+                        </form>
+    
+                        <br />
+                        <div th:if="${listPPFiltered.size() != 0}">
+                            <hr/>
+    
                             <div class="row d-flex justify-content-center">
                                 <h4>List Permintaan Pengiriman</h4>
+                                <br />
+                                <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center">
+                                            <table class="content-table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Waktu Permintaan</th>
+                                                    <th scope="col">Nomor Pengiriman</th>
+                                                    <th scope="col">Nama Penerima</th>
+                                                    <th scope="col">Alamat Penerima</th>
+                                                    <th scope="col">Tanggal Pengiriman</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody th:each="ppBarang, iterationStatus : ${listPPFiltered}">
+                                                <tr>
+                                                    <th scope="row" th:text="${iterationStatus.count}"></th>
+                                                    <td th:text="${ppBarang.permintaanPengiriman.waktuPermintaan}"></td>
+                                                    <td ><a th:href="@{/permintaan-pengiriman/{id}(id=${ppBarang.permintaanPengiriman.idPermintaanPengiriman})}" th:text="${ppBarang.permintaanPengiriman.nomorPengiriman}"></a></td>
+                                                    <td th:text="${ppBarang.permintaanPengiriman.namaPenerima}"></td>
+                                                    <td th:text="${ppBarang.permintaanPengiriman.alamatPenerima}"></td>
+                                                    <td th:text="${ppBarang.permintaanPengiriman.tanggalPengiriman}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="${listPPFiltered.size() != 0}">
+                            <div th:if="${search.equals(true)}">
+                                <hr />
+                                <div class="mt-5 justify-content-center">
+                                    <h5 class="text-center text-danger" th:text="'--Tidak ditemukan permintaan pengiriman berdasarkan barang merk ' + ${barangCari.merk} + ' dan/atau dengan range tanggal tersebut--'"></h5>
+                                </div>
+                            </div>
+                            <div th:unless="${search.equals(true)}">
+                                <div class="row d-flex justify-content-center">
+                                    <h4>List Permintaan Pengiriman</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div th:unless="${listBarangExisting.size() != 0}">
+                        <hr />
+                            <!-- <div class="mt-5 justify-content-center">
+                                <h5 class="text-center text-danger" th:text="'--Belum ada barang yang terdaftar--'"></h5>
+                            </div>
+                            <div class="mt-5 justify-content-center">
+                                <a type="button" class="btn btn-md btn-primary" href="/barang/tambah">Tambah Barang</a>
+                            </div> -->
+
+                            <div class="mt-4 text-center">
+                                <h5 class="text-center text-danger" th:text="'--Belum ada barang yang terdaftar--'"></h5>
+                            </div>
+                        </br>
+                    </br>
+                            <div class="mt-3 text-center">
+                                <a type="button" class="btn btn-md btn-primary" href="/barang/tambah">Tambah Barang</a>
+                            </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
